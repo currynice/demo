@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  security:
+    user:
+      name: cxy
+      password: 123456
+  application:
+    # Spring Boot Admin展示的客户端项目名
+    name: client1
+  boot:
+   admin:
+     client:
+       # Spring Boot Admin 服务端地址,安全密码(不然无法注册)
+       url: "http://localhost:8000/admin"
+       username: admin
+       password: admin
+       instance:
+         metadata:
+           # 客户端端点信息的安全认证信息,使用这些凭据对客户端的Actuator端点进行身份验证
+           user.name: ${spring.security.user.name}
+           user.password: ${spring.security.user.password}
+
+#actuator端点是安全的management.security.enabled=true
+management:
+  endpoint:
+    health:
+      # 端点健康情况，默认值"never"，设置为"always"可以显示硬盘使用情况和线程情况
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        # 生产环境中，要限制端点暴露的哪些内容，默认["health","info"]，设置"*"代表暴露所有可访问的端点
+        include: "*"
+
+# 记录下日志SpringBoot 的 Logging 配置的级别有7个：TRACE , DEBUG , INFO , WARN , ERROR , FATAL , OFF
+logging:
+  # 设置日志保存的路径，path和file只需要设置一个，指定path则日志名称固定为spring.log
+  path: /client1-log
+  # 打印日志的级别
+  level:
+    root: info

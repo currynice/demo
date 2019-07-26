@@ -1,0 +1,12 @@
+init:
+  projectName: springboot-demo-properties
+  authors: [cxy,cxy2]
+  level2: 2
+  rules:
+    id: 1
+    content: 规则
+  version-enum: TRY
+  period: 2000ms
+
+
+

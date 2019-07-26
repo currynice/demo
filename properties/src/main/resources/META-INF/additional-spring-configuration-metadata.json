@@ -1,0 +1,101 @@
+{
+  "groups": [
+    {
+      "name": "init",
+      "type": "com.cxy.properties.Info.MyProperties",
+      "sourceType": "com.cxy.properties.Info.MyProperties"
+    },
+    {
+      "name": "init.rules",
+      "type": "com.cxy.properties.Info.MyProperties$Rules",
+      "sourceType": "com.cxy.properties.Info.MyProperties"
+    },
+    {
+      "name": "extra",
+      "type": "com.cxy.properties.Info.EggProperties",
+      "sourceType": "com.cxy.properties.Info.EggProperties"
+    },
+    {
+      "name": "extra.egg",
+      "type": "com.cxy.properties.Info.Egg",
+      "sourceType": "com.cxy.properties.Info.EggProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "init.authors",
+      "type": "java.lang.String[]",
+      "sourceType": "com.cxy.properties.Info.MyProperties"
+    },
+    {
+      "name": "init.level",
+      "type": "java.lang.Integer",
+      "sourceType": "com.cxy.properties.Info.MyProperties",
+      "defaultValue": 0,
+      "deprecation": {
+        "level": "error",
+        "reason": "deprecation",
+        "replacement": "init.level2"
+      }
+    },
+    {
+      "name": "init.level2",
+      "type": "java.lang.Integer",
+      "sourceType": "com.cxy.properties.Info.MyProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "init.period",
+      "type": "java.time.Duration",
+      "sourceType": "com.cxy.properties.Info.MyProperties",
+      "defaultValue": "3000ms"
+    },
+    {
+      "name": "init.project-name",
+      "type": "java.lang.String",
+      "sourceType": "com.cxy.properties.Info.MyProperties"
+    },
+    {
+      "name": "init.rules.content",
+      "type": "java.lang.String",
+      "sourceType": "com.cxy.properties.Info.MyProperties$Rules"
+    },
+    {
+      "name": "init.rules.id",
+      "type": "java.lang.Integer",
+      "sourceType": "com.cxy.properties.Info.MyProperties$Rules",
+      "defaultValue": 0
+    },
+    {
+      "name": "init.version-enum",
+      "type": "com.cxy.properties.Info.MyProperties$VersionEnum",
+      "sourceType": "com.cxy.properties.Info.MyProperties"
+    },
+    {
+      "name": "extra.egg.desc",
+      "type": "java.lang.String",
+      "sourceType": "com.cxy.properties.Info.Egg"
+    },
+    {
+      "name": "extra.egg.show",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.cxy.properties.Info.Egg",
+      "defaultValue": false
+    }
+  ],
+  "hints": [
+    {
+      "name": "init.version-enum",
+      "values": [
+        {
+          "value": "TRY",
+          "description": "shiyong"
+        },
+        {
+          "value": "FORMAL",
+          "description": "zhengshi"
+        }
+      ]
+    }
+  ]
+}
