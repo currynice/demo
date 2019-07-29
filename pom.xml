@@ -18,6 +18,7 @@
         <module>admin-client</module>
         <module>demo-aop</module>
         <module>demo-validation</module>
+        <module>exception-handler</module>
     </modules>
 
     <properties>

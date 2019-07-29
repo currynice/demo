@@ -6,12 +6,18 @@ import com.cxy.demovalidation.bean.DemoResult;
 import com.cxy.demovalidation.service.ValidService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Locale;
 
 @RestController
 @Slf4j(topic = "Logger")
@@ -20,6 +26,11 @@ public class ValidController {
 
     @Autowired
     private ValidService validService;
+
+
+    //MessageSource格式化错误信息，支持国际化
+    @Autowired
+    private MessageSource messageSource;
 
     /**
      * 校验失败将抛出MethodArgumentNotValidException 异常
@@ -66,6 +77,34 @@ public class ValidController {
 
     }
 
+
+    /**
+     * 返回所有错误信息
+     * @param newBook
+     * @return
+     */
+    @PostMapping("/books4")
+    public String valid4(@RequestBody @Valid Book newBook,BindingResult result) {
+        if(result.hasErrors()){
+            //消息集合
+            StringBuilder msg = new StringBuilder();
+            //全部错误集合
+           // List<ObjectError> errors = result.getAllErrors();
+            //字段错误集合
+            List<FieldError> errors = result.getFieldErrors();
+            //应该是zh_CN
+            Locale currentLocale = LocaleContextHolder.getLocale();
+            for(FieldError error:errors){
+                //格式化错误消息
+                String errorMsg = messageSource.getMessage(error,currentLocale);
+                msg.append(errorMsg);
+            }
+
+           return msg.toString();
+        }
+        return "字段验证通过";
+
+    }
 
 
 

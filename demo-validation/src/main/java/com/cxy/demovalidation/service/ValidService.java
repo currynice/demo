@@ -2,7 +2,9 @@ package com.cxy.demovalidation.service;
 
 
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -11,6 +13,9 @@ import java.util.*;
 
 @Service
 public class ValidService {
+
+
+
     /**
      * 使用hibernate的注解,返回全部
      * @param failFast(false） 将完成校验,返回全部信息

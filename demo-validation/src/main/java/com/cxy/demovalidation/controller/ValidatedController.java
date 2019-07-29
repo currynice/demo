@@ -31,7 +31,9 @@ public class ValidatedController {
      */
     @PostMapping("/validated/books/{name}")
     public Book valid1(@Length(max = 3,message ="name超过最大长度") @PathVariable String name) {
-       return new Book(name);
+        Book book = new Book();
+        book.setName(name);
+       return book;
     }
 
     /**localhost:8080/validated/books2?name=11111
@@ -44,7 +46,9 @@ public class ValidatedController {
      */
     @PostMapping("/validated/books2")
     public Book valid2(@Length(max = 3,message ="name超过最大长度") @RequestParam String name) {
-        return new Book(name);
+        Book book = new Book();
+        book.setName(name);
+        return book;
     }
 
 

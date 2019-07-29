@@ -19,8 +19,10 @@ public class Book {
     @NotNull(message = "价格不能为空")
     @DecimalMin(value = "11.23", message = "price最低11.23")
     private BigDecimal price;
+//
+//    public Book( String name) {
+//        this.name = name;
+//    }
 
-    public Book( String name) {
-        this.name = name;
-    }
+
 }
