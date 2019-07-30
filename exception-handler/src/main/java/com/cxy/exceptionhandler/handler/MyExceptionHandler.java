@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 //ControllerAdvice用来配置控制器通知
-@ControllerAdvice//(annotations = {Controller.class, RestController.class})
+@ControllerAdvice(annotations = {Controller.class, RestController.class})
 @Slf4j
 public class MyExceptionHandler {
     private static final String DEFAULT_ERROR_VIEW = "error";
 
     /**
      * 异常返回son
+     * ExceptionHandler 默认Exception
      * @param ex
+     *
      * @return  {"code":400,"message":"Bad Request","data":null,"timestamp":"2019-07-29 04:18:13"}
      */
     @ExceptionHandler(JsonException.class)
