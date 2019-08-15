@@ -19,6 +19,8 @@
         <module>demo-aop</module>
         <module>demo-validation</module>
         <module>exception-handler</module>
+        <module>demo-datasources</module>
+        <module>purespringdatasource</module>
     </modules>
 
     <properties>

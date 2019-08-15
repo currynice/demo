@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 @SpringBootApplication
 @Slf4j(topic = "Logger")
@@ -28,8 +29,16 @@ public class DemoDatasourcesApplication implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        log.info(dataSource.toString());
-        Connection connection = dataSource.getConnection();
-        log.info(connection.toString());
+        showConnection();
+    }
+
+    /**
+     * 查看数据源记忆连接信息
+     * @throws SQLException
+     */
+   public void showConnection() throws SQLException {
+       log.info(dataSource.toString());
+       Connection connection = dataSource.getConnection();
+       log.info(connection.toString());
     }
 }
