@@ -1,10 +1,11 @@
-package com.cxy.demo.datasources;
+package com.cxy.demo.datasource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,14 +13,17 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 @Slf4j(topic = "Logger")
-public class DemoDatasourcesApplication implements CommandLineRunner {
+public class DemoDatasourceApplication implements CommandLineRunner {
 
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public static void main(String[] args) {
 
-        SpringApplication.run(DemoDatasourcesApplication.class, args);
+        SpringApplication.run(DemoDatasourceApplication.class, args);
     }
 
     /**
@@ -30,6 +34,7 @@ public class DemoDatasourcesApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         showConnection();
+        showData();
     }
 
     /**
@@ -40,5 +45,9 @@ public class DemoDatasourcesApplication implements CommandLineRunner {
        log.info(dataSource.toString());
        Connection connection = dataSource.getConnection();
        log.info(connection.toString());
+    }
+
+    public void showData(){
+       jdbcTemplate.queryForList("SELECT * FROM FOO").forEach(row -> log.info(row.toString()));
     }
 }

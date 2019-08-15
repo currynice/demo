@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.cxy</groupId>
-    <artifactId>demo-datasources</artifactId>
+    <artifactId>demo-datasource</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>demo-datasources</name>
     <description>单数据源，多数据源配置</description>
