@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql:rm-wz98oa6zq9451b98x3o.mysql.rds.aliyuncs.com:3306/db0_master
+    username: root
+    password: Aliyunnb30as
+slave:
+  datasource:
+    url: jdbc:mysql:rm-wz98oa6zq9451b98x3o.mysql.rds.aliyuncs.com:3306/db1_salve1
+    username: root
+    password: Aliyunnb30as
+
+
