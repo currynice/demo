@@ -1,5 +1,6 @@
 package com.cxy.demo.datasources;
 
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
  *   二：排除exclude:DataSourceAutoConfiguration,DataSourceTransactionManagerAutoConfiguration,JdbcTemplateAutoConfiguration，全部使用手动配置
  *
  */
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, PageHelperAutoConfiguration.class})
 @Slf4j(topic = "Logger")
 public class DemoDatasourcesApplication implements CommandLineRunner{
 
@@ -30,13 +31,7 @@ public class DemoDatasourcesApplication implements CommandLineRunner{
     @Autowired
     private DataSource slave1;
 
-
-//    @Autowired
-//    private PlatformTransactionManager masterTxManager;
-//
-//
-//    @Autowired
-//    private PlatformTransactionManager slave1TxManager;
+    
 
     public static void main(String[] args) {
         SpringApplication.run(DemoDatasourcesApplication.class, args);
@@ -53,18 +48,10 @@ public class DemoDatasourcesApplication implements CommandLineRunner{
         log.info("从数据源连接信息{}",slave1.getConnection().toString());
     }
 
-    /**
-     * 查看数据源记忆连接信息
-     * @throws SQLException
-     */
-//    public void showTransactionInfo() {
-//        log.info("主事务管理{}",masterTxManager.toString());
-//        log.info("从事务管理{}",slave1TxManager.toString());
-//    }
+
 
     @Override
     public void run(String... args) throws Exception {
         showConnection();
-    //    showTransactionInfo();
     }
 }

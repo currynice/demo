@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.demo.datasources.dao2.SlaveDao">
     <select id="getAllUser" resultType="com.cxy.demo.datasources.entity.User">
-        select * from slave1_user;
+        select * from slave1_user
     </select>
 </mapper>
