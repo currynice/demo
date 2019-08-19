@@ -22,7 +22,7 @@
         <module>demo-datasource</module>
         <module>pure-spring-datasource</module>
         <module>demo-datasources</module>
-        <module>dynamically-switch-datasources</module>
+        <module>dynamically-switch</module>
     </modules>
 
     <properties>

@@ -1,0 +1,12 @@
+master:
+  datasource:
+    url: jdbc:mysql://rm-wz98oa6zq9451b98x3o.mysql.rds.aliyuncs.com:3306/db0_master?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: Aliyunnb30as
+    driver-class-name: com.mysql.jdbc.Driver
+slave:
+  datasource:
+    url: jdbc:mysql://rm-wz98oa6zq9451b98x3o.mysql.rds.aliyuncs.com:3306/db1_slave1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: Aliyunnb30as
+    driver-class-name: com.mysql.jdbc.Driver
