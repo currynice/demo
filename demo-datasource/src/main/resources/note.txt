@@ -1,0 +1,5 @@
+JDBC主要结构
+care :JdbcTemplate 等核心接口和操作;
+datasource ：数据源相关
+objectt :将JDBC操作封装成对象
+support:错误码等等

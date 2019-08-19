@@ -3,6 +3,7 @@ package com.cxy.demo.datasources;
 import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,13 +26,15 @@ public class DemoDatasourcesApplication implements CommandLineRunner{
 
         //主数据源
     @Autowired
+    @Qualifier("master")
     private DataSource master;
 
     //从数据源
     @Autowired
+    @Qualifier("slave1")
     private DataSource slave1;
 
-    
+
 
     public static void main(String[] args) {
         SpringApplication.run(DemoDatasourcesApplication.class, args);

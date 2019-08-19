@@ -10,6 +10,7 @@ spring:
     password:
     #可选，根据url自动配置
     driver-class-name: org.h2.Driver
+#配置HikariDataSource
     hikari:
       maximum-pool-size: 5
       minimum-idle: 5
