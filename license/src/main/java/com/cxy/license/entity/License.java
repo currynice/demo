@@ -1,7 +1,7 @@
 package com.cxy.license.entity;
 
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 
 /**
@@ -13,7 +13,6 @@ import lombok.Data;
  * https://blog.csdn.net/yishui2005/article/details/83284195
  */
 @Data
-@AllArgsConstructor
 public class License {
 
 

@@ -7,8 +7,8 @@ public class DistributeListence {
         /** 生成公钥、私钥对。公钥公开，注意保管好私钥（如果泄露，则有可能被hacker随意创建license）
          *  
          */
-         public void generateKey() throws Exception{
-
+         public static void generateKey() throws Exception{
+//             KeyUtil.generateKey()
          }
 
         /**
@@ -26,6 +26,11 @@ public class DistributeListence {
          public  boolean  validate(License license) throws Exception{
                 return false;
         }
+
+    public static void main(String[] args) throws Exception{
+
+    }
+
 
 
 }
