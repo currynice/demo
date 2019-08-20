@@ -23,6 +23,7 @@
         <module>pure-spring-datasource</module>
         <module>demo-datasources</module>
         <module>dynamically-switch</module>
+        <module>license</module>
     </modules>
 
     <properties>
