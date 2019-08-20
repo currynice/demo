@@ -1,0 +1,1 @@
+CREATE TABLE test (id INT IDENTITY, name VARCHAR(64));

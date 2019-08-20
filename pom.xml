@@ -24,6 +24,7 @@
         <module>demo-datasources</module>
         <module>dynamically-switch</module>
         <module>license</module>
+        <module>transaction</module>
     </modules>
 
     <properties>
