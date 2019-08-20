@@ -8,18 +8,21 @@ import com.cxy.demo.dynamicallyswitch.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@MapperScan(basePackages ="com.cxy.demo.dynamicallyswitch.dao",sqlSessionFactoryRef ="sqlSessionFactoryBean",sqlSessionTemplateRef = "sqlSessionTemplate")
 public class MyBatisDynamicDataSourceConfig {
 
     @Autowired
@@ -52,8 +55,8 @@ public class MyBatisDynamicDataSourceConfig {
         bean.setDataSource(dynamicDataSource());
         //对应mybatis.type-aliases-package配置
         //bean.setTypeAliasesPackage("com.cxy.dataSource.pojo");
-        //对应mybatis.mapper-locations配置  用注解了
-       // bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        //对应mybatis.mapper-locations配置
+        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         //开启驼峰映射
         //bean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         return bean.getObject();
@@ -66,9 +69,9 @@ public class MyBatisDynamicDataSourceConfig {
      * @return
      * @throws Exception
      */
-    @Bean(name = "testSqlSessionTemplate")
+    @Bean(name = "sqlSessionTemplate")
     @Primary
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("sqlSessionFactoryBean") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactoryBean") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

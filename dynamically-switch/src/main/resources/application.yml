@@ -10,3 +10,11 @@ slave:
     username: root
     password: Aliyunnb30as
     driver-class-name: com.mysql.jdbc.Driver
+#mybatis
+mybatis:
+  type-aliases-package: com.cxy.dmeo.dynamicallyswitch.entity
+  #开启驼峰映射
+  configuration:
+    map-underscore-to-camel-case: true
+
+
