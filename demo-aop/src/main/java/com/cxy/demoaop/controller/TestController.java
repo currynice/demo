@@ -3,7 +3,6 @@ package com.cxy.demoaop.controller;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.cxy.demoaop.aspect.Limit;
-import com.cxy.demoaop.aspect.LimitEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +28,7 @@ public class TestController {
     @Limit( period = 30, count = 5, name = "testLimit", prefix = "limit")
     public Dict testLimit() {
 
-        return Dict.create().set("次数",atomicInteger.incrementAndGet());
+        return Dict.create().set("time",atomicInteger.incrementAndGet());
     }
 
     @GetMapping("/whoIam")

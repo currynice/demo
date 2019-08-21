@@ -1,6 +1,6 @@
-package com.cxy.exceptionhandler.exception;
+package com.cxy.demo.exceptionhandler.exception;
 
-import com.cxy.exceptionhandler.constant.Status;
+import com.cxy.demo.exceptionhandler.constant.Status;
 import lombok.Getter;
 
 /**

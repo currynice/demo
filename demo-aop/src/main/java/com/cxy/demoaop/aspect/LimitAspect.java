@@ -2,7 +2,7 @@ package com.cxy.demoaop.aspect;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.cxy.demoaop.LimitRequestException;
+import com.cxy.demoaop.exceptionhandler.LimitAccessException;
 import com.cxy.demoaop.util.IPUtils;
 import com.cxy.demoaop.util.RequestHolder;
 import com.google.common.collect.ImmutableList;
@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -63,12 +64,13 @@ public class LimitAspect {
         RedisScript<Number> redisScript = new DefaultRedisScript<>(script, Number.class);
         String sha1Code = redisScript.getSha1();
         Number count = (Number) redisTemplate.execute(redisScript, keys, limit.count(), limit.period());
+
         if (null != count && count.intValue() <= limit.count()) {
             log.info("第{}次访问key为 {}，描述为 [{}] 的接口", count, keys,limit.name());
             //继续执行
             return joinPoint.proceed();
         } else {
-            throw new LimitRequestException("访问次数受限制");
+            throw new LimitAccessException("访问次数受限制");
         }
     }
 

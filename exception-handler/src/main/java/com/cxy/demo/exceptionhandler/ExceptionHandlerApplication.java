@@ -1,4 +1,4 @@
-package com.cxy.exceptionhandler;
+package com.cxy.demo.exceptionhandler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package com.cxy.exceptionhandler.vo;
+package com.cxy.demo.exceptionhandler.vo;
 
-import com.cxy.exceptionhandler.constant.Status;
-import com.cxy.exceptionhandler.exception.BaseException;
+import com.cxy.demo.exceptionhandler.constant.Status;
+import com.cxy.demo.exceptionhandler.exception.BaseException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 

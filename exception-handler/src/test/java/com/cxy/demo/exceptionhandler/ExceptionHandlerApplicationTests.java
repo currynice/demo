@@ -1,4 +1,4 @@
-package com.cxy.exceptionhandler;
+package com.cxy.demo.exceptionhandler;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,11 +1,11 @@
-package com.cxy.exceptionhandler.controller;
+package com.cxy.demo.exceptionhandler.controller;
 
 
 
-import com.cxy.exceptionhandler.constant.Status;
-import com.cxy.exceptionhandler.exception.JsonException;
-import com.cxy.exceptionhandler.exception.PageException;
-import com.cxy.exceptionhandler.vo.DemoResult;
+import com.cxy.demo.exceptionhandler.constant.Status;
+import com.cxy.demo.exceptionhandler.exception.JsonException;
+import com.cxy.demo.exceptionhandler.exception.PageException;
+import com.cxy.demo.exceptionhandler.vo.DemoResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

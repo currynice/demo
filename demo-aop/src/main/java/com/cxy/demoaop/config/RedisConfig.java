@@ -1,26 +1,25 @@
 package com.cxy.demoaop.config;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.OxmSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -94,34 +93,24 @@ public class RedisConfig extends CachingConfigurerSupport {
         // key 序列化
         RedisSerializer stringSerializer = new StringRedisSerializer();
         /*Javabean json 间相互转换  序列化反序列化redis的value 默认JDK*/
-        //Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         /* redis 转换为xml*/
-        // OxmSerializer oxmSerializer = new OxmSerializer();
-//        ObjectMapper om = new ObjectMapper();
-//        //指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public
-//        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+         OxmSerializer oxmSerializer = new OxmSerializer();
+        ObjectMapper om = new ObjectMapper();
+        //指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
 //        //序列化输入类型，非final ,Integer String 将报错
-//        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-//        jackson2JsonRedisSerializer.setObjectMapper(om);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 
-        //FastJson序列化
-        FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
-        // value值的序列化采用fastJsonRedisSerializer
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
-        // 全局开启AutoType，不建议使用
-        // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-        // 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.cxy.domain");
-//        ParserConfig.getGlobalInstance().addAccept("me.zhengjie.modules.system.service.dto");
-//        ParserConfig.getGlobalInstance().addAccept("me.zhengjie.modules.system.domain");
-//        ParserConfig.getGlobalInstance().addAccept("me.zhengjie.modules.quartz.domain");
-//        ParserConfig.getGlobalInstance().addAccept("me.zhengjie.modules.monitor.domain");
-//        ParserConfig.getGlobalInstance().addAccept("me.zhengjie.modules.security.security");
+
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
         template.setKeySerializer(stringSerializer);
         template.setHashKeySerializer(stringSerializer);
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
     }
 
 

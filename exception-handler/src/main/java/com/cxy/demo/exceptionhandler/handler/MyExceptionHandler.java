@@ -1,9 +1,9 @@
-package com.cxy.exceptionhandler.handler;
+package com.cxy.demo.exceptionhandler.handler;
 
 
-import com.cxy.exceptionhandler.exception.JsonException;
-import com.cxy.exceptionhandler.exception.PageException;
-import com.cxy.exceptionhandler.vo.DemoResult;
+import com.cxy.demo.exceptionhandler.exception.JsonException;
+import com.cxy.demo.exceptionhandler.exception.PageException;
+import com.cxy.demo.exceptionhandler.vo.DemoResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;

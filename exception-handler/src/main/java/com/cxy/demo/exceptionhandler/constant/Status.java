@@ -1,4 +1,4 @@
-package com.cxy.exceptionhandler.constant;
+package com.cxy.demo.exceptionhandler.constant;
 
 
 import lombok.Getter;
