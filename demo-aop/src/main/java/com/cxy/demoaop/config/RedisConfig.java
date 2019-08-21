@@ -88,6 +88,9 @@ public class RedisConfig extends CachingConfigurerSupport {
         return template;
     }
 
+
+
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     private  void setSerializer( RedisTemplate<String,Object> template){
         // key 序列化
@@ -114,6 +117,16 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
 
+
+//for test
+//RedisTemplate<String, String>
+@Bean(name = "testTemplate")
+public RedisTemplate<String,String> template(RedisConnectionFactory connectionFactory){
+    RedisTemplate<String,String> template = new RedisTemplate<>();
+    template.setConnectionFactory(connectionFactory);
+    template.afterPropertiesSet();
+    return template;
+}
 
 
 
