@@ -117,8 +117,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
 
-
-//for test
+    /**
+     * 测试各个序列化器的RedisTemplate
+     * @param connectionFactory
+     * @return
+     */
 //RedisTemplate<String, String>
 @Bean(name = "testTemplate")
 public RedisTemplate<String,String> template(RedisConnectionFactory connectionFactory){
