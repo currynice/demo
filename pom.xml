@@ -26,6 +26,7 @@
         <module>dynamically-switch</module>
         <module>license</module>
         <module>transaction</module>
+        <module>loading</module>
     </modules>
 
     <properties>

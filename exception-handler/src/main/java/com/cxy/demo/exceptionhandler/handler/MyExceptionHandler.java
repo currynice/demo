@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 //ControllerAdvice用来配置控制器通知
 @ControllerAdvice(annotations = {Controller.class, RestController.class})
 @Slf4j
-public class MyExceptionHandler {
+public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String DEFAULT_ERROR_VIEW = "error";
 
     /**
