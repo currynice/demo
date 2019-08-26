@@ -27,6 +27,7 @@
         <module>license</module>
         <module>transaction</module>
         <module>loading</module>
+        <module>demojpa</module>
     </modules>
 
     <properties>
@@ -46,6 +47,8 @@
         <mysql.starter.version>2.0.0</mysql.starter.version>
         <pagehelper.version>1.2.3</pagehelper.version>
         <google.version>20.0</google.version>
+        <joda.money.version>1.0.1</joda.money.version>
+        <usertype.core.version>6.0.1.GA</usertype.core.version>
     </properties>
 
 
@@ -111,6 +114,20 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.joda</groupId>
+                <artifactId>joda-money</artifactId>
+                <version>${joda.money.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jadira.usertype</groupId>
+                <artifactId>usertype.core</artifactId>
+                <version>${usertype.core.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
