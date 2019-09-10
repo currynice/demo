@@ -2,15 +2,19 @@ package com.cxy.demo.demomybatis;
 
 import com.cxy.demo.demomybatis.dao.CoffeeMapper;
 import com.cxy.demo.demomybatis.entity.Coffee;
+import com.github.pagehelper.PageRowBounds;
+import com.github.pagehelper.autoconfigure.PageHelperProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
+//https://pagehelper.github.io/docs/howtouse/#2-%E9%85%8D%E7%BD%AE%E6%8B%A6%E6%88%AA%E5%99%A8%E6%8F%92%E4%BB%B6
 @SpringBootApplication
 @MapperScan("com.cxy.demo.demomybatis.dao")
 @Slf4j
@@ -18,17 +22,34 @@ public class DemoMybatisApplication implements CommandLineRunner{
 	@Autowired
 	private CoffeeMapper coffeeMapper;
 
+	@Autowired
+	private PageHelperProperties pageHelperProperties;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoMybatisApplication.class, args);
 	}
 
+	private void rowBounds(){
+
+
+		coffeeMapper.findWithRowBounds(new RowBounds(1,3)).forEach(System.out::println);
+
+		//默认无法查询总数,PageRowBounds可以得到总数total
+		PageRowBounds pageRowBounds = new PageRowBounds(1,3);
+		coffeeMapper.findWithPageRowBounds(pageRowBounds).forEach(System.out::println);
+		System.out.println(pageRowBounds.getTotal());
+
+	}
+
 	@Override
 	public void run(String... args) throws Exception {
-		Coffee	espresso = Coffee.builder().name("espresso").price(Money.of(CurrencyUnit.of("CNY"),20.00)).build();
-	    Long id = 	coffeeMapper.save(espresso);
-	    log.info("Coffee{} =>{}",id,espresso);
+//		Coffee	espresso = Coffee.builder().name("espresso").price(Money.of(CurrencyUnit.of("CNY"),20.00)).build();
+//	    Long id = 	coffeeMapper.save(espresso);
+//	    log.info("Coffee{} =>{}",id,espresso);
+//
+//	    espresso = coffeeMapper.findById(id);
+//		log.info("Coffee{} =>{}",id,espresso);
+		rowBounds();
 
-	    espresso = coffeeMapper.findById(id);
-		log.info("Coffee{} =>{}",id,espresso);
 	}
 }
