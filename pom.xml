@@ -28,6 +28,8 @@
         <module>transaction</module>
         <module>loading</module>
         <module>demojpa</module>
+        <module>demo-mybatis</module>
+        <module>demo-mybatis-generator</module>
     </modules>
 
     <properties>
