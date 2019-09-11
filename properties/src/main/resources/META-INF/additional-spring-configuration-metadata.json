@@ -45,6 +45,12 @@
       "defaultValue": 0
     },
     {
+      "name": "init.favors",
+      "type": "java.lang.String",
+      "sourceType": "com.cxy.properties.Info.MyProperties",
+      "defaultValue": null
+    },
+    {
       "name": "init.period",
       "type": "java.time.Duration",
       "sourceType": "com.cxy.properties.Info.MyProperties",
@@ -80,6 +86,7 @@
       "name": "extra.egg.show",
       "type": "java.lang.Boolean",
       "sourceType": "com.cxy.properties.Info.Egg",
+       "description": "是否显示",
       "defaultValue": false
     }
   ],

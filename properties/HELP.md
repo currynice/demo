@@ -1,4 +1,19 @@
+配置文件可以出现的位置
+1.根目录config文件夹
+2.根目录
+3.classpath 下config
+4.classpath
+
+#YAML
+是json的超集,starter-web中snakeyaml实现了对YAML的解析,可以实现复杂的配置（数据存放入集合），但是不能使用@PropertySource
+
+#Profile
+对标Spring的@Profile,application-{profile}.properties/yaml 使用占位符设置不同环境
+spring.profile.active=profile进行选择
+或SpringApplicationBuilder.application.setAdditionalProfiles("")
+
 # spring-configuration-metadata.json 详解
+
 
 #额外配置
 如果想在配置文件中能够提示该字段描述，以及该字段可选参数，是否弃用等信息时，需要加额外的配置

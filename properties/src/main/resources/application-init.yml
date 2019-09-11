@@ -7,6 +7,10 @@ init:
     content: 规则
   version-enum: TRY
   period: 2000ms
+  favors:
+    -小明
+    -小王
+    -Coding
 
 
 
