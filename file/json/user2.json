@@ -1,0 +1,9 @@
+[ {
+  "name" : "mkyong",
+  "age" : 38,
+  "messages" : [ "msg 1", "msg 2", "msg 3" ]
+}, {
+  "name" : "lap",
+  "age" : 5,
+  "messages" : [ "msg a", "msg b", "msg c" ]
+} ]
