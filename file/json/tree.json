@@ -1,0 +1,40 @@
+[{
+  "name": {
+    "first": "c",
+    "last": "xy"
+  },
+  "age": 22,
+  "contacts": [{
+    "type": "home",
+    "ref": "120"
+  }, {
+    "type": "company",
+    "ref": "110"
+  }]
+},
+  {
+    "name": {
+      "first": "c2",
+      "last": "xy2"
+    },
+    "age": 20,
+    "contacts": [{
+      "type": "home",
+      "ref": "111"
+    }, {
+      "type": "school",
+      "ref": "711"
+    }]
+  },
+  {
+    "name": {
+      "first": "c3",
+      "last": "xy3"
+    },
+    "age": 16,
+    "contacts": [{
+      "type": "home",
+      "ref": "911"
+    }]
+  }
+]
