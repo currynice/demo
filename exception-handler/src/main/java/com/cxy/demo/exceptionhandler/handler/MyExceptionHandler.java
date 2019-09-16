@@ -6,14 +6,14 @@ import com.cxy.demo.exceptionhandler.exception.PageException;
 import com.cxy.demo.exceptionhandler.vo.DemoResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-//ControllerAdvice用来配置控制器通知
+import java.util.HashMap;
+import java.util.Map;
+
+//ControllerAdvice全局异常处理
 @ControllerAdvice(annotations = {Controller.class, RestController.class})
 @Slf4j
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
@@ -47,6 +47,9 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
         view.setViewName(DEFAULT_ERROR_VIEW);
         return view;
     }
+
+
+
 
 
 }
