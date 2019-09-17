@@ -5,13 +5,15 @@ import com.cxy.demo.exceptionhandler.exception.JsonException;
 import com.cxy.demo.exceptionhandler.exception.PageException;
 import com.cxy.demo.exceptionhandler.vo.DemoResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 //ControllerAdvice全局异常处理
 @ControllerAdvice(annotations = {Controller.class, RestController.class})
@@ -19,7 +21,9 @@ import java.util.Map;
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String DEFAULT_ERROR_VIEW = "error";
 
+
     /**
+     * {@link BasicErrorController#error(HttpServletRequest)}
      * 异常返回son
      * ExceptionHandler 默认Exception
      * @param ex
@@ -34,8 +38,10 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * {@link BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)}
      * 统一 页面 异常处理
-     *
+     * 静态页面static目录error子目录下找4xx,5xx作为错误视图,找不到就使用error作为默认错误页面，在没有就是默认错误页面
+     * 错误页面分为动态和静态,先动后静,先找404，405，找不到就找4xx,5xx
      * @param exception PageException
      * @return 统一跳转到异常页面
      */

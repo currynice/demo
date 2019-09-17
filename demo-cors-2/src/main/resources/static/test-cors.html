@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.3.1.min.js"></script>
+  </head>
+  <body>
+    <div id="contentDiv">
+    </div>
+    <div id="deleteResult">
+    </div>
+    <input type="button" value="add" onclick="getData()"><br>
+    <input type="button" value="delete" onclick="deleteData()"><br>
+    <div id="app">
+    </div>
+    <script>
+    
+     function deleteData() {
+      $.ajax( {
+      url:'http://localhost:8080/cors/delete/99',
+      type:'delete',
+      success: function (msg) {
+          $("#deleteResult").html(msg) ;
+              }
+           })
+     } 
+
+     function getData () {
+      $.ajax( {
+      url:'http://localhost:8080/cors/add',
+      type:'post',
+      data:{name:'程新宇'},
+      success: function (msg) {
+          $("#contentDiv").html(msg) ;
+              }
+           })
+     } 
+    </script>
+  </body>
+  </html>

@@ -34,6 +34,8 @@
         <module>demo-json</module>
         <module>demo-resources</module>
         <module>demo-upload</module>
+        <module>demo-cors-1</module>
+        <module>demo-cors-2</module>
     </modules>
 
     <properties>
