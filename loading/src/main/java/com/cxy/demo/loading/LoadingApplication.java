@@ -2,7 +2,6 @@ package com.cxy.demo.loading;
 
 
 import com.cxy.demo.loading.exceptions.DemoException;
-import com.cxy.demo.loading.exceptions.NormalException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
