@@ -33,7 +33,8 @@ public class LimitAspect {
     @Autowired
     private RequestHolder requestHolder;
 
-    @Pointcut(value = "within(com.cxy.demoaop.controller..*)@annotation(com.cxy.demoaop.aspect.Limit)")
+    //切入点
+    @Pointcut(value = "within(com.cxy.demoaop.controller..*)&&@annotation(com.cxy.demoaop.aspect.Limit)")
     public void  getPointCut(){
     }
 

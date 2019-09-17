@@ -14,6 +14,12 @@ public class CorsConfig implements WebMvcConfigurer {
      * allowedOrigins 示支持的域
      * maxAge 表示探测请求的有效期，在前面的讲解中，读对于 DELETE PUT或者有 自定义头信息的请求，
      * 在执行过程中会先发送探测请求，探测请求不用每次都发,有效期过了之后才会发送探测请求 这个属性，默认是 1800 秒，即 30分钟
+     *
+     *
+     *             response.addHeader("Access-Control-Allow-Origin", "*");
+     *             response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+     *             response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+     *             response.addHeader("Access-Control-Max-Age", "1800");//30 min
      * @param registry
      */
     @Override
