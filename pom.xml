@@ -36,6 +36,7 @@
         <module>demo-upload</module>
         <module>demo-cors-1</module>
         <module>demo-cors-2</module>
+        <module>demo-interceptor</module>
     </modules>
 
     <properties>
