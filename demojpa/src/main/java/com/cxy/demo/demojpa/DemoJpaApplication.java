@@ -43,6 +43,9 @@ public class DemoJpaApplication implements ApplicationRunner {
         coffeeRepository.save(latte);
         log.info("latte:{}",latte);
 
+        Coffee maxExperienceCoffee = coffeeRepository.getMaxExperorxcer();
+        log.info("maxExperienceCoffee:{}",maxExperienceCoffee);
+
         Order order = Order.builder().customer("cxy").items(Collections.singletonList(espresso)).state(OrderState.PAID).build();
         orderRepository.save(order);
         log.info("order:{}",order);
@@ -50,6 +53,7 @@ public class DemoJpaApplication implements ApplicationRunner {
         Order order2 = Order.builder().customer("wang").items(Arrays.asList(espresso,latte)).state(OrderState.CANCELLED).build();
         orderRepository.save(order2);
         log.info("order2:{}",order2);
+
     }
 
     public void select(){
