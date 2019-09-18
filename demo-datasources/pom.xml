@@ -67,7 +67,7 @@
     </dependencies>
 
     <build>
-        <finalName>demo-databases</finalName>
+        <finalName>demo-datasources</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

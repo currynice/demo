@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
+//与@MapperScan二选一
 @Mapper
 public interface CoffeeMapper {
 
@@ -23,7 +24,8 @@ public interface CoffeeMapper {
 
 
     //start分页
-    @Select("SELECT * FROM t_coffee ORDER BY  id")
+    //xml放在resources下,放在dao下会被maven忽略
+   // @Select("SELECT * FROM t_coffee ORDER BY  id")
     List<Coffee>  findAll();
 
 
