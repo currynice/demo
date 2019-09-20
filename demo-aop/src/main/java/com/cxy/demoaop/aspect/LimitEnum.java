@@ -6,7 +6,7 @@ public enum LimitEnum {
      */
     USER_ID,
     /**
-     * ip
+     * ip,容易误伤
      */
     IP
 }

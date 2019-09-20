@@ -118,7 +118,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 
 
     /**
-     * 测试各个序列化器的RedisTemplate
+     * 测试各个序列化器的序列化方式的RedisTemplate
+     * @link
      * @param connectionFactory
      * @return
      */

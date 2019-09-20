@@ -20,9 +20,6 @@ public class DemoAopApplicationTests {
    private RedisTemplate testTemplate;
 
 
-
-
-
     @Test
     public void contextLoads() {
     }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ValidatedController {
 
     //————————————对pathVariable 路径变量 或者单个requestParam参数，甚至service方法中的参数，也可以进行校验
-    //————————————Step1: classLevel使用@Validate
+    //————————————Step1: typeLevel使用@Validate
     //————————————Step2:尽情使用 javax.validation.constraints.*
 
     /**

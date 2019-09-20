@@ -59,7 +59,7 @@ public class MyBatisConfigMaster {
         return  sqlSessionFactoryMaster;
     }
 
-
+    //管理MyBatis的SqlSession
     @Bean
     public SqlSessionTemplate sqlSessionTemplateMaster(){
         return new SqlSessionTemplate(sqlSessionFactoryMaster());

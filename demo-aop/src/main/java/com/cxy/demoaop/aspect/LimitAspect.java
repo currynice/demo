@@ -52,7 +52,8 @@ public class LimitAspect {
                         key = IPUtils.getIP(thisRequest);
                         break;
                     case USER_ID: //todo  获取到请求带的参数
-                         key = "test-id";
+                         //key = "test-id";
+                         key = joinPoint.getArgs()[0].toString();
                          break;
                     default:
                         key= limit.key();
