@@ -39,7 +39,7 @@ public class LimitControllerTest {
     @Limit( period = 30, count = 5, name = "testLimitIp", prefix = "ip",limitObject = LimitEnum.IP)
     public Dict testLimit(HttpServletRequest request) {
 
-        return Dict.create().set("message","成功访问").set("ip", IPUtil.getIP(request)).set("time", DateUtil.formatDateTime(new Date()));
+        return Dict.create().set("message","成功访问!!!").set("ip", IPUtil.getIP(request)).set("time", DateUtil.formatDateTime(new Date()));
     }
 
     @GetMapping("/whoIam")

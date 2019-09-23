@@ -1,0 +1,5 @@
+#定义重启触发文件，resources下 .trigger-file,需要重启时，修改即可，前提项目变化了
+spring:
+  devtools:
+    restart:
+      trigger-file: trigger-file

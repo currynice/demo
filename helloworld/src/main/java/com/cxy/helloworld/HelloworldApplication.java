@@ -31,7 +31,7 @@ public class HelloworldApplication {
     @GetMapping("hello")
     public String sayHello(@RequestParam(required = false,value = "who")String who){
         if(StrUtil.isBlank(who)){
-            return "hello stranger";
+            return "hello stranger?";
         }
         return StrUtil.format("hello{}",who);
 

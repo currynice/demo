@@ -13,3 +13,6 @@ filePath: d:\\test
 
 #https
 
+spring:
+  profiles:
+    active: dev

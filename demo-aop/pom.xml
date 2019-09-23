@@ -47,6 +47,15 @@
             <optional>true</optional>
         </dependency>
 
+
+        <!--防止将devtools带到其他模块-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
