@@ -2,13 +2,15 @@ package com.cxy.demoaop.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class IPUtils  {
-    private IPUtils(){
+public class IPUtil {
+    private IPUtil(){
         throw new RuntimeException("不可实例化");
     }
 
     /**
      * 获取ip地址
+     * According to:
+     * https://www.cnblogs.com/leiqiannian/p/7753156.html
      * @param request
      * @return
      */

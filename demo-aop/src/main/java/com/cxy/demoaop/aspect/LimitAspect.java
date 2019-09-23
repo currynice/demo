@@ -3,7 +3,7 @@ package com.cxy.demoaop.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.cxy.demoaop.exceptionhandler.LimitAccessException;
-import com.cxy.demoaop.util.IPUtils;
+import com.cxy.demoaop.util.IPUtil;
 import com.cxy.demoaop.util.RequestHolder;
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +49,7 @@ public class LimitAspect {
 
         switch (limitType){
                     case IP:
-                        key = IPUtils.getIP(thisRequest);
+                        key = IPUtil.getIP(thisRequest);
                         break;
                     case USER_ID: //todo  获取到请求带的参数
                          //key = "test-id";

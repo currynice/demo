@@ -4,12 +4,14 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.cxy.demoaop.aspect.Limit;
+import com.cxy.demoaop.aspect.LimitEnum;
+import com.cxy.demoaop.util.IPUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>
@@ -26,12 +28,18 @@ public class LimitControllerTest {
      *
      * @return {@link Dict}
      */
-    @GetMapping("/testLimit/{userId}")
-   // @Limit(name = "测试限流方法",prefix = "test",period = 60,count = 5,limitObject = LimitEnum.IP)
-    @Limit( period = 30, count = 5, name = "testLimit", prefix = "limit")
+    @GetMapping("/testLimitId/{userId}")
+    @Limit( period = 30, count = 5, name = "testLimitId", prefix = "id")
     public Dict testLimit(@PathVariable(value = "userId",required = true) String userId) {
 
         return Dict.create().set("message","成功访问").set("time", DateUtil.formatDateTime(new Date()));
+    }
+
+    @GetMapping("/testLimitIp")
+    @Limit( period = 30, count = 5, name = "testLimitIp", prefix = "ip",limitObject = LimitEnum.IP)
+    public Dict testLimit(HttpServletRequest request) {
+
+        return Dict.create().set("message","成功访问").set("ip", IPUtil.getIP(request)).set("time", DateUtil.formatDateTime(new Date()));
     }
 
     @GetMapping("/whoIam")
