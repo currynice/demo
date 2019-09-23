@@ -33,7 +33,6 @@ public class TreeModelTest {
                 //获取age
                 int age = root.path("age").asInt();
                 System.out.println("age:" + age);
-
                 //获取name
                 JsonNode nameNode = root.path("name");
                 String fullName ="";
@@ -47,6 +46,7 @@ public class TreeModelTest {
                 //获取contact
                 JsonNode contactsNode = root.path("contacts");
                 if (contactsNode.isArray()) {
+
                     //turn to ArrayNode
                     System.out.println("Is "+fullName+" 's contactsNode an Array? " + contactsNode.isArray());
 
