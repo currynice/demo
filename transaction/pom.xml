@@ -12,6 +12,7 @@
     <groupId>com.cxy.demo</groupId>
     <artifactId>transaction</artifactId>
     <name>com.cxy.demo.transaction</name>
+    <description>https://yfsyfs.github.io/tags/%E4%BA%8B%E5%8A%A1/</description>
 
     <properties>
         <java.version>1.8</java.version>
