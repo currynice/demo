@@ -13,11 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.OxmSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-
+import org.springframework.data.redis.serializer.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
@@ -41,7 +37,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
 
 
-    /**主键策略 ->like :com.cxy.admin methodName paramNames*/
+    /**缓存主键策略 ->like :com.cxy.admin methodName paramNames*/
     @Override
     @Bean
     public KeyGenerator keyGenerator() {
@@ -106,6 +102,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 
 
+
         jackson2JsonRedisSerializer.setObjectMapper(om);
 
         template.setValueSerializer(jackson2JsonRedisSerializer);
@@ -133,5 +130,10 @@ public RedisTemplate<String,String> template(RedisConnectionFactory connectionFa
 }
 
 
+
+    @Bean(name = "jdkSerializer")
+    public RedisSerializer jdkSerializationRedisSerializer(){
+        return new JdkSerializationRedisSerializer();
+    }
 
 }
