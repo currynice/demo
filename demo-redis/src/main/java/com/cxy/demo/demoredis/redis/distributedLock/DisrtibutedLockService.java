@@ -11,13 +11,17 @@ import redis.clients.jedis.Jedis;
 import java.util.Collections;
 
 /**
- * 上述代码实现，仅对 redis 单实例架构有效，当面对 redis 集群时就无效了。
+ * 仅对 redis 单实例架构有效，当面对 redis 集群时就无效了。
  * 但是一般情况下，我们的 redis 架构多数会做成“主备”模式，然后再通过 redis 哨兵实现主从切换，
  * 这种模式下我们的应用服务器直接面向主机，也可看成是单实例，因此上述代码实现也有效。但是当在主机宕机，
  * 从机被升级为主机的一瞬间的时候，如果恰好在这一刻，由于 redis 主从复制的异步性，
  * 导致从机中数据没有即时同步，那么上述代码依然会无效，导致同一资源有可能会产生两把锁，违背了分布式锁的原则。
  *
  * 附:官方library(redisson)   https://github.com/redisson/redisson
+ *
+ * 上层加锁失败策略:
+ * 1.间隔时间再次发送请求，用户点击按钮间隔一段时间可点击
+ * 2.请求放入延时队列
  */
 @Service
 public class DisrtibutedLockService {

@@ -1,4 +1,4 @@
-package com.cxy.demo.demoredis.redis.anysc;
+package com.cxy.demo.demoredis.redis.anysc.core;
 
 /**
  * @Author: cxy
@@ -6,9 +6,10 @@ package com.cxy.demo.demoredis.redis.anysc;
  * @Description: 定义事件枚举类
  */
 public enum EventType {
-     Like(1),
+     LIKE(1),
      COMMENT(2),
-    REGISTER(3);
+    REGISTER(3),
+    RECONNECTED(4);
 
     private Integer typeId;
      EventType(Integer typeId){

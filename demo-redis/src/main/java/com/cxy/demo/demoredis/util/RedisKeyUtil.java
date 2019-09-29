@@ -9,6 +9,8 @@ public class RedisKeyUtil {
     private static String BIZ_GEO_TEST = "GEO_TEST";
     private static String BIZ_EVENT = "BIZ_EVENT";
 
+    private static String DELAY_KEY = "DELAY";
+
     private static String BIZ_FOLLOWER = "BIZ_FOLLOWER";
 
     private static String BIZ_FOLLOWEE = "BIZ_FOLLOWEE";
@@ -31,6 +33,10 @@ public class RedisKeyUtil {
 
     public static String getEventKey(){
         return BIZ_EVENT;
+    }
+
+    public static String getDelayKey(){
+        return DELAY_KEY;
     }
 
     /**

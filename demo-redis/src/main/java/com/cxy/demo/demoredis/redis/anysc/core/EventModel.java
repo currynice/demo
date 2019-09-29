@@ -1,5 +1,6 @@
-package com.cxy.demo.demoredis.redis.anysc;
+package com.cxy.demo.demoredis.redis.anysc.core;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import java.util.Map;
  * @Description: 事件处理线程
  */
 public class EventModel {
+    @NotNull
+    private String taskId;
     private EventType eventType;  //运行事件
     private Integer actorId;      //触发者
     /*组成一个运行载体*/
@@ -17,10 +20,24 @@ public class EventModel {
 
     private Integer entityOwnerId;//
 
+    //重连次数
+    private Integer times;
+
+    //key-value形式包含更多信息
     private Map<String,String> exds = new HashMap<>();
+
 
     public EventModel(){
         super();
+    }
+
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public EventType getEventType() {
@@ -84,5 +101,13 @@ public class EventModel {
 
     public String getValue(String key){
         return this.exds.get(key);
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
     }
 }

@@ -1,9 +1,9 @@
-package com.cxy.demo.demoredis.redis.anysc;
+package com.cxy.demo.demoredis.redis.anysc.core;
 
 
 import com.cxy.demo.demoredis.util.RedisKeyUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -17,13 +17,16 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 客户端消费者
+ * 1.blocking: 阻塞操作BRPOP ,避免队列空时,空轮询带来的压力
+ * 2.完成重连逻辑，避免长时间闲置，连接被关闭 todo
  * @Author: cxy
  * @Date: 2019/5/11 21:32
  * @Description:  分发Event给Handler
  */
 @Service
+@Slf4j(topic = "Logger")
 public class EventConsumer implements InitializingBean {
-    private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -52,21 +55,22 @@ public class EventConsumer implements InitializingBean {
                 }
            }
         }
-     Thread thread = new Thread(new Runnable() {
-         @Override
-         public void run() {
+
+
+     Thread thread = new Thread(()->{
              while(true){
                EventModel model =  getEvent();
+               if(null==model){
+                   continue;
+               }
                if(!config.containsKey(model.getEventType())){
-                   logger.error("不能识别的事件");
+                   log.error("不能识别的事件");
                    continue;
                }
                for(EventHandler handler:config.get(model.getEventType())){
                    handler.doHandle(model);
                }
              }
-         }
-
      });
 
         thread.start();
@@ -74,13 +78,16 @@ public class EventConsumer implements InitializingBean {
 
 
 
-    //取出事件
+    //取出事件(BRPOP)
     public EventModel  getEvent(){
         try{
            String key = RedisKeyUtil.getEventKey();
-            return  (EventModel) listOperations.rightPop(key,0,TimeUnit.SECONDS);//取出最后一个一直取，直至取到
+            ObjectMapper objectMapper = new ObjectMapper();
+            EventModel eventModel = objectMapper.readValue((String)listOperations.rightPop(key,0,TimeUnit.SECONDS), EventModel.class);
+            return  eventModel;//取出最后一个一直取，0代表一直阻塞，直到取到
         }catch (Exception e){
-            logger.error("从队列取出事件失败");
+            e.printStackTrace();
+            log.error("从队列取出事件失败");
             return null;
         }
     }
