@@ -3,7 +3,9 @@ package com.cxy.demo.demoredis;
 import com.cxy.demo.demoredis.jdkLock.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -13,9 +15,13 @@ import java.util.concurrent.locks.ReentrantLock;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Demo2Tests {
+
+    @Autowired
+    private ValueOperations valueOperations;
+
     private ReentrantLock lock= new ReentrantLock();
 
-    @Test
+    //@Test
     public void contextLoads() throws InterruptedException {
         List<Thread> threadList =threadList(5);
         for(Thread t:threadList){
@@ -37,6 +43,7 @@ public class Demo2Tests {
         }
         return threadList;
     }
+
 
 
 

@@ -4,12 +4,16 @@ import com.cxy.demo.demoredis.redis.anysc.core.DelayProducer;
 import com.cxy.demo.demoredis.redis.anysc.core.EventModel;
 import com.cxy.demo.demoredis.redis.anysc.core.EventProducer;
 import com.cxy.demo.demoredis.redis.anysc.core.EventType;
+import com.cxy.demo.demoredis.redis.bitmaps.BitMapService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
+
+import static com.cxy.demo.demoredis.util.DateUtil.today;
 
 @RestController
 public class TestController {
@@ -19,6 +23,10 @@ public class TestController {
 
     @Autowired
     DelayProducer delayProducer;
+
+    @Autowired
+    private BitMapService bitMapService;
+
 
     @RequestMapping("testComment")
     public String testComment(){
@@ -42,6 +50,21 @@ public class TestController {
         model.setTimes(1);
         model.setEventType(EventType.RECONNECTED);
         return delayProducer.fireDelay(model)?"延时入队成功":"延时入队失败";
+    }
+
+
+    @RequestMapping("addLog/{userIdOffSet}")
+    public String addLog(@PathVariable(name = "userIdOffSet") Long userIdOffSet) {
+         bitMapService.addtodayLoginLog(today(),"comment",userIdOffSet);
+        Long total = bitMapService.getTodayLoginCount(today(),"comment");
+         return "添加记录成功,第"+total+"名用户";
+    }
+
+
+    @RequestMapping("hasLogin/{userIdOffSet}")
+    public String hasLogin(@PathVariable(name = "userIdOffSet") Long userIdOffSet) {
+       return bitMapService.getTodayLoginLog(today(),"comment",userIdOffSet)?"登陆了":"没有登陆";
 
     }
+
 }
