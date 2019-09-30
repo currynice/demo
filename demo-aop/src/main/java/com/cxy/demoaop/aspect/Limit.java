@@ -3,7 +3,7 @@ package com.cxy.demoaop.aspect;
 import java.lang.annotation.*;
 
 /**
- * 限制访问注解
+ * 限制访问注解 todo 初始化可pass次数 于redis-4.0 redis-cell 限流模块
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
