@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -15,6 +16,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Demo2Tests {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private ValueOperations valueOperations;
@@ -42,6 +46,21 @@ public class Demo2Tests {
             threadList.add(t);
         }
         return threadList;
+    }
+
+    /**
+     * 99553
+     * 99.553%
+     */
+    @Test
+    public void testHyperLoglog(){
+        for(int i=1;i<=10*10000;i++){
+            redisTemplate.opsForHyperLogLog().add("2019-09-30:index:uv",i);
+            Long count = redisTemplate.opsForHyperLogLog().size("2019-09-30:index:uv");
+            System.out.println();
+        }
+        System.out.println(redisTemplate.opsForHyperLogLog().size("2019-09-30:index:uv"));
+        System.out.println((double)(redisTemplate.opsForHyperLogLog().size("2019-09-30:index:uv"))/1000+"%");
     }
 
 
