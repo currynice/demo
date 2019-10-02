@@ -63,6 +63,15 @@ public class Demo2Tests {
         System.out.println((double)(redisTemplate.opsForHyperLogLog().size("2019-09-30:index:uv"))/1000+"%");
     }
 
+    @Test
+    public void testScan(){
+        for(int i=1;i<=10*10000;i++){
+            redisTemplate.opsForHyperLogLog().add("key"+i,i);
+
+        }
+    }
+
+
 
 
 

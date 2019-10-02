@@ -37,6 +37,7 @@
         <module>demo-cors-1</module>
         <module>demo-cors-2</module>
         <module>demo-interceptor</module>
+        <module>demo-redis</module>
     </modules>
 
     <properties>

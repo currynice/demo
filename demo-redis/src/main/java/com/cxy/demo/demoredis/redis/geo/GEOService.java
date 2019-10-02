@@ -20,6 +20,8 @@ import static org.springframework.data.redis.connection.RedisGeoCommands.*;
 
 /**
  * 地理位置
+ * GeoHash将二维经纬度映射成一魏整数，将其作为zset的score(52位，取出时还原)
+ * 避免集群部署，造成的迁移卡顿
  */
 @Service
 public class GEOService {
@@ -30,46 +32,64 @@ public class GEOService {
     RedisTemplate<String,Object> redisTemplate;
 
 
-    public void add(City city){
-        if( redisTemplate.opsForGeo().add("nanjing",city.getPoint(),city.getCityName())>0){
+    public void add(City city,String keyName){
+        if( redisTemplate.opsForGeo().add(keyName,city.getPoint(),city.getCityName())>0){
             logger.info("添加单个节点成功");
         }
      }
 
-    public void add(Location location){
-        if( redisTemplate.opsForGeo().add("nanjing",location.getPoint(),location.getLocationName())>0){
+    public void add(Location location,String keyName){
+        if( redisTemplate.opsForGeo().add(keyName,location.getPoint(),location.getLocationName())>0){
             logger.info("添加单个节点成功");
         }
 
     }
 
-    public void addGeos(List<Location> locations){
+    public void addGeos(List<Location> locations,String keyName){
         Map<Object, Point> geos  = locations.stream().collect(Collectors.toMap(x->x.getLocationName(), x->x.getPoint()));
         //Map<String,Point> geos = new HashMap<>();
-        if( redisTemplate.opsForGeo().add("nanjing",geos)>0){
+        if( redisTemplate.opsForGeo().add(keyName,geos)>0){
             logger.info("批量添加节点成功");
         }
 
     }
 
-    public void removeGeo(String ...locationName){
-        redisTemplate.opsForGeo().remove("nanjing",locationName);
+    public void removeGeo(String keyName,String ...locationName){
+        redisTemplate.opsForGeo().remove(keyName,locationName);
     }
 
     //返回一个标准的地理空间的Geohash字符串,类似wtmvp5bpyd0
-    public List<String> geoHash(String ...locationName){
-      return  redisTemplate.opsForGeo().hash("nanjing",locationName);
+    // http://geohash.org/${hash} 校验
+    public List<String> geoHash(String keyName,String ...locationName){
+      return  redisTemplate.opsForGeo().hash(keyName,locationName);
     }
 
-    public List<Point> getPos(String ...locationNames){
-       return  redisTemplate.opsForGeo().position("nanjing",locationNames);
+    /**
+     * 获得集合中任意元素的经纬度
+     * @param keyName
+     * @param locationNames
+     * @return  细微误差
+     */
+    public List<Point> getPos(String keyName,String ...locationNames){
+       return  redisTemplate.opsForGeo().position(keyName,locationNames);
     }
 
 
-    public Distance GEODIST(String lName1, String lName2){
-        GeoOperations<String, Object> geoOps = redisTemplate.opsForGeo();
-        Distance distance = geoOps.distance("nanjing", lName1, lName2, DistanceUnit.KILOMETERS);
-        return distance;
+    public Distance getDist(String keyName,String lName1,String lName2,DistanceUnit distanceUnit){
+        return redisTemplate.opsForGeo().distance(keyName, lName1, lName2,distanceUnit);
+
+    }
+
+    /**
+     * 两个元素之间的距离
+     * @param keyName
+     * @param lName1
+     * @param lName2
+     * @param distanceUnit
+     * @return
+     */
+    public double getDistValue(String keyName,String lName1, String lName2,DistanceUnit distanceUnit){
+        return getDist(keyName, lName1, lName2,distanceUnit).getValue();
     }
 
     /**
@@ -81,13 +101,14 @@ public class GEOService {
      *  asc 从近到远  desc 从远到近
      * @return
      */
-    public GeoResults<GeoLocation<Object>> GEORADIUS(Point target, Distance standard, Long limit) {
+    public GeoResults<GeoLocation<Object>> geoRadius(Point target, Distance standard, Long limit) {
         GeoOperations<String, Object> geoOps = redisTemplate.opsForGeo();
 
         //设置geo查询参数
         GeoRadiusCommandArgs geoRadiusArgs = GeoRadiusCommandArgs.newGeoRadiusArgs();
-        geoRadiusArgs = geoRadiusArgs.includeCoordinates().includeDistance();
-        geoRadiusArgs.sortAscending();
+        geoRadiusArgs = geoRadiusArgs.includeCoordinates()//WITHCOORD
+                .includeDistance();//WITHDIST
+        geoRadiusArgs.sortAscending();//sortDescending
         geoRadiusArgs.limit(limit);//限制查询数量
 
         GeoResults<GeoLocation<Object>> radiusGeo = geoOps.radius(
@@ -98,18 +119,7 @@ public class GEOService {
         return  radiusGeo;
     }
 
-    //查询指定半径内匹配到的最大距离的一个地理空间元素
-    public void GEORADIUSBYMEMBER(String member, Distance standard, Long limit) {
-     GeoOperations<String, Object> geoOps = redisTemplate.opsForGeo();
-        //设置geo查询参数
-        GeoRadiusCommandArgs geoRadiusArgs = GeoRadiusCommandArgs.newGeoRadiusArgs();
-        geoRadiusArgs = geoRadiusArgs.includeCoordinates().includeDistance();//查询返回结果包括距离和坐标
-        geoRadiusArgs.sortAscending();//按查询出的坐标距离中心坐标的距离进行排序
-        geoRadiusArgs.limit(limit);//限制查询数量
-        //new Distance(10, DistanceUnit.KILOMETERS)
-        GeoResults<GeoLocation<Object>> radiusGeo = geoOps.radius(
-                "nanjing", member, standard, geoRadiusArgs);
-    }
+
 
 
 }
