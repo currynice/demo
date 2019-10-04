@@ -44,7 +44,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**RedisTemplate 事务 */
-    @Bean(name = "TredisTemplate")
+    @Bean(name = "multiTemplate")
     public RedisTemplate<String,Object> redisTemplate2(RedisConnectionFactory factory) {
         //StringRedisTemplate  <-  - > RedisTemplate<String,String>
         // StringRedisTemplate template = new StringRedisTemplate(factory);  due to RedisTemplate<String,Object>
@@ -85,6 +85,8 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
     }
+
+
 
 
 

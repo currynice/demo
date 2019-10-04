@@ -32,7 +32,7 @@ public class DifferSerializableWayTests {
      *
      * GenericJackson2JsonRedisSerializer、Jackson2JsonRedisSerializer是先将对象转为json，然后再保存到redis，所以，1在redis中是字符串1，所以无法进行加1
      *JdkSerializationRedisSerializer使用的jdk对象序列化，序列化后的值有类信息、版本号等，所以是一个包含很多字母的字符串，所以根本无法加1,
-         这个序列化器跟memcache的序列化规则很像
+     这个序列化器跟memcache的序列化规则很像
      *GenericToStringSerializer、StringRedisSerializer将字符串的值直接转为字节数组，所以保存到redis中是数字，所以可以进行加1
      *
      */

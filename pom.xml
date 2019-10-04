@@ -38,6 +38,7 @@
         <module>demo-cors-2</module>
         <module>demo-interceptor</module>
         <module>demo-redis</module>
+        <module>demo-cache</module>
     </modules>
 
     <properties>
@@ -89,12 +90,7 @@
                 <version>${google.version}</version>
             </dependency>
 
-            <!--防止将devtools带到其他模块-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring boot-devtools</artifactId>
-                <optional>true</optional>
-            </dependency>
+            
 
 
             <dependency>

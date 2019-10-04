@@ -4,6 +4,7 @@ import com.cxy.demo.demoredis.jdkLock.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -19,6 +20,11 @@ public class Demo2Tests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+
+    @Qualifier("multiTemplate")
+    @Autowired
+    private RedisTemplate multiTemplate;
 
     @Autowired
     private ValueOperations valueOperations;
@@ -70,6 +76,31 @@ public class Demo2Tests {
 
         }
     }
+
+    @Test
+    public void testWatch(){
+
+            multiTemplate.opsForValue().set("account1","5");
+            multiTemplate.watch("account1");
+            int value = Integer.valueOf((String) multiTemplate.opsForValue().get("account1"));
+            value *= 2; // 加倍
+             multiTemplate.multi();
+             multiTemplate.opsForValue().set("account1",value);
+        if (multiTemplate.exec() != null) {//jedis事务失败返回null
+             System.out.println(multiTemplate.opsForValue().get("account1"));
+        }else {
+            System.out.println("失败");
+        }
+
+    }
+
+    @Test
+    public void sss(){
+            System.out.println(multiTemplate.opsForValue().get("account1"));
+
+    }
+
+
 
 
 
