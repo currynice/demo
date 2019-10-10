@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
+
 import java.util.Collections;
 
 /**
@@ -31,14 +33,10 @@ import java.util.Collections;
  */
 @Service
 public class DisrtibutedLockService {
-    //不存在创建
-    private static final String SET_IF_NOT_EXIST="NX";
-    //单位 秒
-    private static final String SET_WITH_EXPIRE_TIME="EX";
-
+    //不存在创建NX, 有过期时间创建EX
     private static final String LOCK_SUCCESS = "OK";
 
-    private static final long SECONS=5L;
+    private static final int SECONS=5;
 
 
 
@@ -55,7 +53,10 @@ public class DisrtibutedLockService {
     public boolean addLock(String lockedKey,String randomValue){
             Object result =  redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
                     Jedis jedis = (Jedis) redisConnection.getNativeConnection();
-                    String setResult = jedis.set(lockedKey, randomValue, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME,SECONS);
+                    SetParams paras = new SetParams();
+                    //不存在创建,5秒
+                    paras.nx().ex(SECONS);
+                    String setResult = jedis.set(lockedKey, randomValue, paras);
                     if (LOCK_SUCCESS.equals(setResult)) {
                         return Boolean.TRUE;
                     }
