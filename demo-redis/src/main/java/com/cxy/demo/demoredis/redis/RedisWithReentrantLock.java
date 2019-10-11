@@ -1,8 +1,6 @@
 package com.cxy.demo.demoredis.redis;
 
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.params.SetParams;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +12,10 @@ public class RedisWithReentrantLock {
     }
 
     private boolean _lock(String key) {
-        SetParams paras = new SetParams();
-        //不存在创建,5秒
-        paras.nx().ex(5);
-        return jedis.set(key, "", paras) != null;
+//        SetParams paras = new SetParams();
+//        //不存在创建,5秒
+//        paras.nx().ex(5);
+        return jedis.set(key, "", "nx","ex",5L) != null;
     }
 
     private void _unlock(String key) {

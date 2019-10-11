@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * jedis 2.9不支持拓展指令
+ */
 public class BloomTest {
 
     private static String chars;
@@ -35,30 +38,30 @@ public class BloomTest {
         return users;
     }
     public static void main(String[] args) {
-        BloomTest bloomer = new BloomTest();
-        List<String> users = bloomer.randomUsers(100000);
-        List<String> usersTrain = users.subList(0, users.size() / 2);
-        List<String> usersTest = users.subList(users.size() / 2, users.size());
-
-        Client client = new Client(new JedisPool());
-        client.delete("codehole");
-
-        // 对应 bf.reserve 指令
-        client.createFilter("codehole", 50000, 0.001);
-        for (String user : usersTrain) {
-            client.add("codehole", user);
-        }
-        int falses = 0;
-        for (String user : usersTest) {
-//            布隆过滤器对于已经见过的元素肯定不会误判，它只会误判那些没见过的元
-//            素。使用 bf.exists 去查找没见过的元素
-            boolean ret = client.exists("codehole", user);
-            if (ret) {
-                falses++;
-            }
-        }
-        System.out.printf("%d %d\n", falses, usersTest.size());
-        client.close();
+//        BloomTest bloomer = new BloomTest();
+//        List<String> users = bloomer.randomUsers(100000);
+//        List<String> usersTrain = users.subList(0, users.size() / 2);
+//        List<String> usersTest = users.subList(users.size() / 2, users.size());
+//
+//        Client client = new Client(new JedisPool());
+//        client.delete("codehole");
+//
+//        // 对应 bf.reserve 指令
+//        client.createFilter("codehole", 50000, 0.001);
+//        for (String user : usersTrain) {
+//            client.add("codehole", user);
+//        }
+//        int falses = 0;
+//        for (String user : usersTest) {
+////            布隆过滤器对于已经见过的元素肯定不会误判，它只会误判那些没见过的元
+////            素。使用 bf.exists 去查找没见过的元素
+//            boolean ret = client.exists("codehole", user);
+//            if (ret) {
+//                falses++;
+//            }
+//        }
+//        System.out.printf("%d %d\n", falses, usersTest.size());
+//        client.close();
     }
 }
 //运行一下，等待约 1 分钟，输出如下：

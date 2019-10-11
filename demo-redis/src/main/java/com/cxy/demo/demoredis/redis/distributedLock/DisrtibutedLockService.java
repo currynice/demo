@@ -8,8 +8,6 @@ import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.params.SetParams;
-
 import java.util.Collections;
 
 /**
@@ -53,10 +51,10 @@ public class DisrtibutedLockService {
     public boolean addLock(String lockedKey,String randomValue){
             Object result =  redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
                     Jedis jedis = (Jedis) redisConnection.getNativeConnection();
-                    SetParams paras = new SetParams();
-                    //不存在创建,5秒
-                    paras.nx().ex(SECONS);
-                    String setResult = jedis.set(lockedKey, randomValue, paras);
+//                    SetParams paras = new SetParams();
+//                    //不存在创建,5秒
+//                    paras.nx().ex(SECONS);
+                    String setResult = jedis.set(lockedKey, randomValue,"nx","ex", 5L);
                     if (LOCK_SUCCESS.equals(setResult)) {
                         return Boolean.TRUE;
                     }

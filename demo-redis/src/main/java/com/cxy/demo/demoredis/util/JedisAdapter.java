@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -54,8 +55,8 @@ public class JedisAdapter implements InitializingBean {
         print(7, jedis.llen(listName));
         print(8, jedis.lrange(listName, 2, 6));
         print(9, jedis.lindex(listName, 3));
-        print(10, jedis.linsert(listName, ListPosition.AFTER, "a4", "xx"));
-        print(10, jedis.linsert(listName, ListPosition.BEFORE, "a4", "bb"));
+        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.AFTER, "a4", "xx"));
+        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.BEFORE, "a4", "bb"));
         print(11, jedis.lrange(listName, 0 ,12));
 
         // hash
@@ -309,7 +310,11 @@ public class JedisAdapter implements InitializingBean {
         } finally {
             if (tx != null) {
 
-                tx.close();
+                try {
+                    tx.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             if (jedis != null) {
