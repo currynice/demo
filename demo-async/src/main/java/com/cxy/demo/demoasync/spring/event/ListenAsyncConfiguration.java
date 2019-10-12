@@ -1,4 +1,4 @@
-package com.cxy.demo.demoasync.event;
+package com.cxy.demo.demoasync.spring.event;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;

@@ -1,4 +1,4 @@
-//package com.cxy.demo.demoasync.event;
+//package com.cxy.demo.demoasync.spring.event;
 //
 //
 //import org.springframework.context.ApplicationEvent;
