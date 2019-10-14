@@ -1,15 +1,22 @@
 package com.cxy.demo.demoasync;
 
+import com.cxy.demo.demoasync.entity.GitHubUser;
 import com.cxy.demo.demoasync.service.TestException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -105,6 +112,47 @@ public class AsyncDemo {
         return CompletableFuture.completedFuture(movies.stream().filter(m->m.startsWith(x)).collect(Collectors.toList()));
 
     }
+
+    public CompletableFuture<Boolean> isServerAlive(String host) {
+        CompletableFuture<Boolean> future = new CompletableFuture<Boolean>(){
+            @Override
+            public Boolean get() throws InterruptedException, ExecutionException {
+                InetAddress address = null;
+                try {
+                    address = InetAddress.getByName(host);
+                    return address.isReachable(1000);
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                    return false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        };
+        return future;
+    }
+
+
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    /**
+     * 以currynice 进行测试
+     * @param user
+     * @return
+     */
+    public CompletableFuture<GitHubUser> findGitHubUser(String user) throws InterruptedException {
+        log.info("Looking up " + user);
+        String url = String.format("https://api.github.com/users/%s", user);
+        //invoke https://api.github.com/users convert to GitHubUser
+        GitHubUser results = restTemplate.getForObject(url, GitHubUser.class);
+        //sleep 1s ,用于演示这么调用的好处
+        Thread.sleep(1000L);
+        return CompletableFuture.completedFuture(results);
+    }
+
 
 
 
