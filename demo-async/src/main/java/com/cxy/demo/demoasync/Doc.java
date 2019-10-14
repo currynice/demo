@@ -13,6 +13,20 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  */
 public class Doc {
     /**
+     * Thread
+     * when the main thread dies, all its child thread dies without completing their execution
+     * creating a thread is already expensive(https://stackoverflow.com/questions/5483047/why-is-creating-a-thread-said-to-be-expensive)
+     */
+
+
+    /**
+     * ThreadPool
+     *      is a pool with a fixed number of threads
+     */
+
+
+
+    /**
      * Spring {@link TaskExecutor} 本质是{@link java.util.concurrent.Executor}
      * spring集成了一些实现
      * {@link  SimpleAsyncTaskExecutor} 不是真的线程池，不重用线程，每次调用都会创建一个新的线程。
@@ -30,7 +44,7 @@ public class Doc {
      * 异步的方法有3种
      * 1. 最简单的异步调用，返回值为void
      * 2. 带参数的异步调用 异步方法可以传入参数
-     * 3. 异常调用返回Future, 或 todo CompleteFuture
+     * 3. 异常调用返回Future, 或  CompleteFuture(prefer to)
      */
 
 }

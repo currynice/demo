@@ -1,7 +1,6 @@
 package com.cxy.demo.demoasync;
 
 import com.cxy.demo.demoasync.service.TestException;
-import com.sun.xml.internal.ws.util.CompletedFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -18,8 +17,6 @@ import java.util.stream.Collectors;
 /**
  * @Author: cxy
  * @Date: 2019/10/13 16:17
- * todo CompleteFuture
- * https://blog.knoldus.com/future-vs-completablefuture-1/
  * @Description:
  */
 @Component

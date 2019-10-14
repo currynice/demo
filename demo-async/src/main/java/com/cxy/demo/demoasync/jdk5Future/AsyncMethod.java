@@ -1,4 +1,4 @@
-package com.cxy.demo.demoasync.jdkfuture;
+package com.cxy.demo.demoasync.jdk5Future;
 
 /**
  * 几个将要被调用的异步方法
@@ -6,7 +6,7 @@ package com.cxy.demo.demoasync.jdkfuture;
 public class AsyncMethod {
 
     //抛出异常的方法
-    public void methodWithError(){
+    public static void methodWithError(){
         throw new IllegalArgumentException("参数不对");
     }
 
