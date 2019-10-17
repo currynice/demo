@@ -11,6 +11,9 @@ import java.util.Arrays;
 
 
 /**
+ * <strong>时间过长的初始化可以考虑异步化</strong>
+ *
+ *
  * 命令行工具 args即主方法的参数 ,
  * @see LoadingApplication#main(String[]), 启动时设置Program arguments
  *

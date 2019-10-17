@@ -92,7 +92,7 @@
                 <version>${google.version}</version>
             </dependency>
 
-            <!--版本迁移时使用，完成后去除依赖-->
+            <!--版本迁移时使用，properties after environment @PropertiesSource完成后去除依赖-->
 <!--            <dependency>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
 <!--                <artifactId>spring-boot-properties-migrator</artifactId>-->

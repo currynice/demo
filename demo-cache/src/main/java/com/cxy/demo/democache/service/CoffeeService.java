@@ -52,6 +52,21 @@ public class CoffeeService {
      */
 
 
+    //test init
+    @Cacheable(value = "cacheTest")
+    public Coffee testGet(String id){
+
+        return coffeeMapper.findById(Long.valueOf(id));
+    }
+
+
+
+    @CachePut(value = "cacheTest")
+    public Coffee testInit(String id){
+        return coffeeMapper.findById(Long.valueOf(id));
+    }
+
+
 
 
 }

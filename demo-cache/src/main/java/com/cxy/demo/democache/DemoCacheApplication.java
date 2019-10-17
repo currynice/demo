@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @MapperScan("com.cxy.demo.democache.dao")
-//开启缓存
-@EnableCaching
 @RestController
 public class DemoCacheApplication {
 
