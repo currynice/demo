@@ -1,0 +1,3 @@
+# FailureAnalysisReporters
+org.springframework.boot.diagnostics.FailureAnalysisReporter=\
+  com.cxy.demo.failureanalyzer.CxyPortInUseFailureAnalyzer
