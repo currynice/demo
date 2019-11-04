@@ -20,7 +20,7 @@ import static org.springframework.data.redis.connection.RedisGeoCommands.*;
 
 /**
  * 地理位置
- * GeoHash将二维经纬度映射成一魏整数，将其作为zset的score(52位，取出时还原)
+ * GeoHash将二维经纬度映射成一魏整数，将其作为zset的score(52位bit，取出时还原)，(base32方式编码，52bit可以存10位geohash值,对应0.6x0,6米,转换后有0.424m误差)
  * 避免集群部署，造成的迁移卡顿
  */
 @Service
