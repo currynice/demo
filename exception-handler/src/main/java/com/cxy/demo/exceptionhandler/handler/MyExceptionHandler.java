@@ -44,6 +44,9 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
      * 错误页面分为动态和静态,先动后静,先找404，405，找不到就找4xx,5xx
      * @param exception PageException
      * @return 统一跳转到异常页面
+     *
+     *  控制器通知监听 @RestController	，@RestController注解的控制器统⼀都是返回JSON格式的数据。
+     *  *  在遇到异常后，请求已经不再控制器内了，已经交付给控制器通知类，那么通知类如果同样想返回JSON数据，这⾥就需要配置@ResponseBody注解来实现。
      */
     @ExceptionHandler(value = PageException.class)
     public ModelAndView pageErrorHandler(PageException exception) {
