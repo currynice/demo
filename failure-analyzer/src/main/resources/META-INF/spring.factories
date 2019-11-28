@@ -1,3 +1,3 @@
-# FailureAnalysisReporters
+# FailureAnalysisReporters,项目启动顺序不稳定，不能通过IOC的方式注入
 org.springframework.boot.diagnostics.FailureAnalysisReporter=\
   com.cxy.demo.failureanalyzer.CxyPortInUseFailureAnalyzer
