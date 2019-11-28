@@ -42,6 +42,7 @@
         <module>demo-redis</module>
         <module>demo-cache</module>
         <module>failure-analyzer</module>
+        <module>mystater</module>
     </modules>
 
     <properties>

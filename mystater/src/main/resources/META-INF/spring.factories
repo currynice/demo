@@ -1,0 +1,2 @@
+#配置⾃定义Starter的⾃动化配置
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.cxy.my.CxyConfiguration
