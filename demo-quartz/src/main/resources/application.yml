@@ -1,0 +1,71 @@
+spring:
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            #\u8C03\u5EA6\u5668\u5B9E\u4F8B\u540D\u79F0
+            instanceName: clusteredScheduler
+            #\u8C03\u5EA6\u5668\u5B9E\u4F8B\u552F\u4E00\u7F16\u53F7\u81EA\u52A8\u751F\u6210
+            instanceId: AUTO
+          jobStore:
+            #\u6301\u4E45\u5316\u65B9\u5F0F\u914D\u7F6E
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            #\u6301\u4E45\u5316\u65B9\u5F0F \u6570\u636E\u5E93\u9A71\u52A8\uFF0CMySql
+            #MSSQL	:	org.quartz.impl.jdbcjobstore.MSSQLDelegate
+            #HSQLDB	:	org.quartz.impl.jdbcjobstore.HSQLDBDelegate
+            #Oracle	:	org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            #\u76F8\u5173\u6570\u636E\u8868\u524D\u7F00(\u9ED8\u8BA4qrtz_)
+            #tablePrefix:
+            #\u5F00\u542F\u5206\u5E03\u5F0F\u90E8\u7F72,\u540C\u65F6\u5F00\u542FinstanceId
+            isClustered: true
+            #\u5206\u5E03\u5F0F\u8282\u70B9\u6709\u6548\u6027\u68C0\u67E5\u65F6\u95F4\u95F4\u9694\uFF0C\u6BEB\u79D2
+            clusterCheckinInterval: 10000
+            #\u914D\u7F6E\u662F\u5426\u4F7F\u7528
+            useProperties: false
+          threadPool:
+            #\u7EBF\u7A0B\u6C60\u5B9E\u73B0\u7C7B
+            class: org.quartz.simpl.SimpleThreadPool
+            #\u6267\u2F8F\u6700\u2F24\u5E76\u53D1\u7EBF\u7A0B\u6570\u91CF
+            threadCount: 10
+            #\u7EBF\u7A0B\u4F18\u5148\u7EA7
+            threadPriority: 5
+            #\u914D\u7F6E\u4E3A\u5B88\u62A4\u7EBF\u7A0B\uFF0C\u8BBE\u7F6E\u540E\u4EFB\u52A1\u5C06\u4E0D\u4F1A\u6267\u884C
+            makeThreadsDaemons: true
+            #\u914D\u7F6E\u662F\u5426\u542F\u52A8\u2F83\u52A8\u52A0\u8F7D\u6570\u636E\u5E93\u5185\u7684\u5B9A\u65F6\u4EFB\u52A1\uFF0C\u9ED8\u8BA4true
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #\u6570\u636E\u5E93\u65B9\u5F0F
+    job-store-type: jdbc
+    #\u8C03\u5EA6\u5668\u81EA\u52A8\u8FD0\u884C(default:true)
+    autoStartup: true
+      #\u521D\u59CB\u5316\u8868\u7ED3\u6784
+    jdbc:
+      initialize-schema: never
+     #\u9879\u2F6C\u542F\u52A8\u5B8C\u6210\u540E\uFF0C\u7B49\u5F852\u79D2\u540E\u5F00\u59CB\u6267\u2F8F\u8C03\u5EA6\u5668\u521D\u59CB\u5316
+    startup-delay: 2
+    #\u8BBE\u7F6E\u8986\u76D6\u5DF2\u5B58\u5728\u7684\u4EFB\u52A1(default:true)
+    overwrite-existing-jobs: true
+  #\u6570\u636E\u5E93
+  datasource:
+    url: jdbc:mysql://localhost:3306/quartz?allowMultiQueries=true&characterEncoding=UTF-8&useUnicode=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    sql-script-encoding: UTF-8
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.cxy.demo.demoquartz.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
