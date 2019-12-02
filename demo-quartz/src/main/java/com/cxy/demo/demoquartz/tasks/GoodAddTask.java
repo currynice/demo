@@ -24,6 +24,7 @@ public class GoodAddTask extends QuartzJobBean {
         logger.info("商品添加完成后执⾏任务，任务时间:{}",new Date());
         try {
             schedulerOperation.createTime();
+            logger.info("111");
         } catch (Exception e) {
             e.printStackTrace();
         }

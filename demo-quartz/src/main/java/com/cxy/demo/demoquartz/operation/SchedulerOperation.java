@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.UUID;
 
 
+/**
+ * 使用的是SpringBoot配置的数据源，独立的话：用@QuartzDataSource作用于一个数据源bean,确保SchedulerFactoryBean和模式初始化都使用特定于quartz的数据源。
+ */
 @Component
 public class SchedulerOperation {
 
@@ -31,7 +34,7 @@ public class SchedulerOperation {
         //创建任务
         JobDetail jobDetail	=	JobBuilder.newJob(GoodAddTask.class).withIdentity(name,group).build();
         //创建任务触发器
-        Trigger trigger	=	TriggerBuilder.newTrigger().withIdentity(name,group).startAt(new Date(startAtTime)).build();
+        Trigger trigger	=	TriggerBuilder.newTrigger().withIdentity(name,group).withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(20)).startAt(new Date(startAtTime)).build();
         //将触发器与任务绑定到调度器内
         scheduler.scheduleJob(jobDetail,trigger);
 
