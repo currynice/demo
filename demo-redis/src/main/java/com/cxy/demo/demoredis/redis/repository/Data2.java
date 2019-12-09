@@ -4,23 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.index.Indexed;
 
-//ttl:60
-@RedisHash(value = "test_cache01",timeToLive = 60)
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+//给data-jpa-repository用的
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DemoData {
+@Entity
+@Table(name = "demo_data")
+public class Data2 implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Indexed
     private String name;
 
     private String subject;
+
 }

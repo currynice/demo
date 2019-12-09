@@ -2,5 +2,10 @@ package com.cxy.demo.demoredis.redis.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface DemoRedisRepository extends CrudRepository<DemoData,Long> {
+import java.util.Optional;
+
+public interface DemoRedisRepository extends CrudRepository<DataCache,Long> {
+
+    Optional<DataCache> findByName(String name);
+
 }
