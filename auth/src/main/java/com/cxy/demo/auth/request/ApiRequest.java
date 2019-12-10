@@ -1,12 +1,11 @@
-package com.cxy.demo.auth.domain;
+package com.cxy.demo.auth.request;
 
 
 /**
- *
- * 1.将 ticket、AppID、时间戳拼接到 URL 中，形成新的 URL；
- * 2.解析 URL，得到 ticket、AppID、时间戳等信息。
+ *解析 URL，得到 ticket、AppID、时间戳等信息。
  */
 public class ApiRequest {
+
 
     //完整url 包含请求参数等
     private String baseUrl;
@@ -21,17 +20,22 @@ public class ApiRequest {
     private long timestamp;
 
 
-    public ApiRequest(String baseUrl, String appId, String ticket, long timestamp) {
+    public ApiRequest(String baseUrl, String appId, String ticket) {
         this.baseUrl = baseUrl;
-        this.appId = appId;
+        this.appId = getLocalAppId();
         this.ticket = ticket;
-        this.timestamp = timestamp;
+        this.timestamp = System.currentTimeMillis();
     }
+
 
     public String getBaseUrl() {
         return baseUrl;
     }
 
+    /**
+     * 获得机器码
+     * @return
+     */
     public String getAppId() {
         return appId;
     }
@@ -44,7 +48,10 @@ public class ApiRequest {
         return timestamp;
     }
 
-    public static ApiRequest createFromFullUrl(String url){
-
+    //todo
+    private String getLocalAppId(){
+        return "abcde123";
     }
+
+
 }
