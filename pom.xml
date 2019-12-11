@@ -18,6 +18,7 @@
         <module>demo-async</module>
         <module>admin-server</module>
         <module>admin-client</module>
+        <module>alert</module>
         <module>demo-aop</module>
         <module>demo-validation</module>
         <module>exception-handler</module>
