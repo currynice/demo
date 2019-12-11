@@ -65,7 +65,7 @@ public class LimitAspect {
                         break;
                 }
 
-        /**不可变集合*/
+        /**不可变集合,或者Collections.unmodifiableList()*/
         ImmutableList keys = ImmutableList.of(StrUtil.join("-",limit.prefix() , key, thisRequest.getRequestURI().replaceAll("/","-")));
         String script = buildScript();
         RedisScript<Number> redisScript = RedisScript.of(script, Number.class);
