@@ -15,7 +15,9 @@ import java.util.Optional;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages="com.cxy.demoaop.aspect.logwithnotannotation.repository")
-//开启切面类的代理
+//使得Aop生效
+// proxyTargetClass控制aop的具体实现方式,默认使用java Proxy,true:cglib
+//exposeProxy控制代理的暴露方式,解决内部调用不能使用代理的场景，默认为false)
 @EnableAspectJAutoProxy
 public class DemoAopApplication implements CommandLineRunner {
 

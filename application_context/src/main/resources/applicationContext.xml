@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <!--注册TestBean,设置info=Bar-->
+    <bean id="testBeanX" class="com.cxy.application_context.benas.TestBean">
+        <constructor-arg name="info" value="Bar" />
+    </bean>
+
+
+<!--    &lt;!&ndash;注册切面类&ndash;&gt;-->
+<!--    <bean id="fooAspect" class="com.cxy.application_context.aop.AfterReturningAspect" />-->
+</beans>

@@ -45,6 +45,7 @@
         <module>failure-analyzer</module>
         <module>mystater</module>
         <module>reactive</module>
+        <module>application_context</module>
     </modules>
 
     <properties>

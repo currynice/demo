@@ -9,18 +9,19 @@ spring:
             #调度器实例编号自动生成,手动需保持唯一性
             instanceId: AUTO
           jobStore:
-            #持久化方式
+            # MySql持久化方式,才支持集群
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
-            #MySql
             #MSSQL	:	org.quartz.impl.jdbcjobstore.MSSQLDelegate
             #HSQLDB	:	org.quartz.impl.jdbcjobstore.HSQLDBDelegate
             #Oracle	:	org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             #quartz相关数据表前缀(默认qrtz_)
             #tablePrefix:
-           #开启分布式部署(将instanceId: AUTO,ClusterManager负责初始化分布式节点)
+           #开启分布式部署(将instanceId: AUTO,ClusterManager负责初始化分布式节点),通知Scheduler实例要它参与到一个集群当中
             isClustered: true
-            #分布式节点有效性检查时间间隔 ,毫秒
+            # 分布式节点有效性检查时间间隔
+            # 可以检测一个失败的Scheduler实例，且当前 Scheduler会以此来接管任何执行失败并可恢复的Job。通过检入操作，Scheduler 也会更新自身的状态记录。
+            # 默认值是 15000 (即15 秒)。
             clusterCheckinInterval: 10000
             #分布式配置是否使用
             useProperties: false
@@ -28,7 +29,7 @@ spring:
             #线程池实现类
             class: org.quartz.simpl.SimpleThreadPool
             #最大并发线程数量
-            threadCount: 10
+            threadCount: 20
             #线程优先级
             threadPriority: 5
             #配置为守护线程，设置后任务将不会执⾏
