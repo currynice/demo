@@ -44,6 +44,7 @@
         <module>demo-cache</module>
         <module>failure-analyzer</module>
         <module>mystater</module>
+        <module>mybatis-cache</module>
         <module>reactive</module>
         <module>application_context</module>
     </modules>
