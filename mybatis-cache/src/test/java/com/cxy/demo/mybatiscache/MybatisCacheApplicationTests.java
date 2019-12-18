@@ -29,7 +29,7 @@ public class MybatisCacheApplicationTests {
     /**
      *   一级缓存 ,sqlSession级别的
      *   <setting name="localCacheScope" value="SESSION"/>
-     *   <setting name="cacheEnabled" value="true"/>
+     *
      * @throws Exception
      */
     @Test
@@ -46,7 +46,6 @@ public class MybatisCacheApplicationTests {
     /**
      *   一级缓存 ,一个会话中，进行修改，将失效
      *   <setting name="localCacheScope" value="SESSION"/>
-     *   <setting name="cacheEnabled" value="true"/>
      * @throws Exception
      */
     @Test
@@ -63,7 +62,7 @@ public class MybatisCacheApplicationTests {
     /**
      *   一级缓存只再sqlSession间共享
      *   <setting name="localCacheScope" value="SESSION"/>
-     *   <setting name="cacheEnabled" value="true"/>
+     *
      * @throws Exception
      */
     @Test
@@ -88,4 +87,72 @@ public class MybatisCacheApplicationTests {
         studentEntity.setAge(20);
         return studentEntity;
     }
+
+    /**
+     *  SqlSession不提交事务commit(),二级缓存不生效
+     *  <setting name="localCacheScope" value="SESSION"/>
+     *   <setting name="cacheEnabled" value="true"/>
+     * @throws Exception
+     */
+    @Test
+    public void testCacheWithoutCommitOrClose() throws Exception {
+        SqlSession sqlSession1 = sqlSessionFactory.openSession(true);
+        SqlSession sqlSession2 = sqlSessionFactory.openSession(true);
+
+        StudentMapper studentMapper1 = sqlSession1.getMapper(StudentMapper.class);
+        StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+
+        System.out.println("studentMapper1读取数据: " + studentMapper1.getStudentById(1));
+        System.out.println("studentMapper2读取数据: " + studentMapper2.getStudentById(1));
+    }
+
+    /**
+     *  SqlSession提交事务commit(),二级缓存生效
+     *  <setting name="localCacheScope" value="SESSION"/>
+     *  <setting name="cacheEnabled" value="true"/>
+     * @throws Exception
+     */
+    @Test
+    public void testCacheWithCommitOrClose() throws Exception {
+        SqlSession sqlSession1 = sqlSessionFactory.openSession(true); // 自动提交事务
+        SqlSession sqlSession2 = sqlSessionFactory.openSession(true); // 自动提交事务
+
+        StudentMapper studentMapper1 = sqlSession1.getMapper(StudentMapper.class);
+        StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+
+        System.out.println("studentMapper1读取数据: " + studentMapper1.getStudentById(1));
+        sqlSession1.commit();
+        System.out.println("studentMapper2读取数据: " + studentMapper2.getStudentById(1));
+
+    }
+
+
+    /**
+     *  update()操作，并提交事务后，sqlsession2的StudentMapper 查询数据库，没有走Cache。
+     *  <setting name="localCacheScope" value="SESSION"/>
+     *   <setting name="cacheEnabled" value="true"/>
+     * @throws Exception
+     */
+    @Test
+    public void testCacheWithUpdate() throws Exception {
+        SqlSession sqlSession1 = sqlSessionFactory.openSession(true); // 自动提交事务
+        SqlSession sqlSession2 = sqlSessionFactory.openSession(true); // 自动提交事务
+        SqlSession sqlSession3 = sqlSessionFactory.openSession(true); // 自动提交事务
+
+
+        StudentMapper studentMapper1 = sqlSession1.getMapper(StudentMapper.class);
+        StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+        StudentMapper studentMapper3 = sqlSession3.getMapper(StudentMapper.class);
+
+
+        System.out.println("studentMapper1读取数据: " + studentMapper1.getStudentById(1));
+        sqlSession1.close();
+        System.out.println("studentMapper2读取数据: " + studentMapper2.getStudentById(1));
+
+        studentMapper3.updateStudentName("方方",1);
+        sqlSession3.commit();
+        System.out.println("studentMapper2读取数据: " + studentMapper2.getStudentById(1));
+    }
+
+
 }
