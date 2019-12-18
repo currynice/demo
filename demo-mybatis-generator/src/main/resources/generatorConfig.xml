@@ -24,6 +24,7 @@
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
+        <!--路径必须先存在哦,手写和自动生成的最好使用manual和auto文件夹区分开来，防止手写的被覆盖或merge-->
         <sqlMapGenerator targetPackage="com.cxy.demo.demomybatisgenerator.dao"
                          targetProject="./src/main/resources/mapper">
             <property name="enableSubPackages" value="true" />

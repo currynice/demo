@@ -12,6 +12,7 @@
     <name>spring-boot-demo</name>
     <url>none</url>
     <modules>
+        <module>auth</module>
         <module>helloworld</module>
         <module>properties</module>
         <module>actuator</module>
@@ -45,6 +46,7 @@
         <module>demo-converter</module>
         <module>failure-analyzer</module>
         <module>mystater</module>
+        <module>reactive</module>
         <module>mybatis-cache</module>
         <module>reactive</module>
         <module>application_context</module>
@@ -73,6 +75,7 @@
         <mybatis.generator.version>1.3.7</mybatis.generator.version>
         <fastjson.version>1.2.47</fastjson.version>
         <p6spy.version>3.8.1</p6spy.version>
+        <jackson.dataformat.xml.version>2.9.0</jackson.dataformat.xml.version>
     </properties>
 
 
@@ -156,7 +159,12 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
-
+            <!--reactive redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.joda</groupId>
@@ -185,8 +193,15 @@
             </dependency>
 
 
+            <!--jackson XML-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson.dataformat.xml.version}</version>
+            </dependency>
 
-    </dependencies>
+
+        </dependencies>
     </dependencyManagement>
 
 

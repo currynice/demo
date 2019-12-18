@@ -1,6 +1,7 @@
 spring:
   jpa:
     hibernate:
+      #生产环境注意，删除啊危险
       ddl-auto: create-drop
     properties:
       hibernate:

@@ -21,6 +21,7 @@ public class BaseEntity implements Serializable {
     private static final long serialVersionUID = -1520800010442155329L;
 
     @Id
+    //不会创建hibernate-sequence表
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
