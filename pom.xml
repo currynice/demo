@@ -42,6 +42,7 @@
         <module>demo-interceptor</module>
         <module>demo-redis</module>
         <module>demo-cache</module>
+        <module>demo-converter</module>
         <module>failure-analyzer</module>
         <module>mystater</module>
         <module>mybatis-cache</module>
