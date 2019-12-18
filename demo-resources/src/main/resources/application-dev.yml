@@ -2,4 +2,8 @@ demo:
   resources:
     osType: 0
     path: D://test//
+##linux
+#    osType: 1
+#    path: test\
+
 
