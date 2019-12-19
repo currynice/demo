@@ -49,6 +49,7 @@
         <module>reactive</module>
         <module>mybatis-cache</module>
         <module>reactive</module>
+        <module>demo-rest-template</module>
         <module>application_context</module>
     </modules>
 
