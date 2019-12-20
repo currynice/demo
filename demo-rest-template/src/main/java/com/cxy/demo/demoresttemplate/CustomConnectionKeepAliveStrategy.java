@@ -16,7 +16,8 @@ public class CustomConnectionKeepAliveStrategy implements ConnectionKeepAliveStr
 
     private final long DEFAULT_SECONDS = 30L;
     /**
-     *   单位毫秒
+     *    方法要保证线程安全
+     *   连接的空闲时间,超过将无法复用，单位毫秒
      *  -1永久有效,避免这种情况
      *
      *  先取response的header的keepAlive
@@ -42,5 +43,7 @@ public class CustomConnectionKeepAliveStrategy implements ConnectionKeepAliveStr
             return  defaultNumber;
         }
     }
+
+
 
 }

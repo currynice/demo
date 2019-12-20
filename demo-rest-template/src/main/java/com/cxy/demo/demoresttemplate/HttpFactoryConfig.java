@@ -51,7 +51,9 @@ public class HttpFactoryConfig {
 
         //return new  RestTemplate();
         return builder
+                //连接超时100s
                 .setConnectTimeout(Duration.ofMillis(100))
+                //读取超时
                 .setReadTimeout(Duration.ofMillis(500))
                 .requestFactory(this::requestFactory)
                 .build();
