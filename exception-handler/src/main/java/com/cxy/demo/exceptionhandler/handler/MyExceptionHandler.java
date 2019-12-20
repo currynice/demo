@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//ControllerAdvice全局异常处理,级别低于Controller下的方法
+//全局级别, 低于Controller下的方法
 @ControllerAdvice(annotations = {Controller.class, RestController.class})
 @Slf4j
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {

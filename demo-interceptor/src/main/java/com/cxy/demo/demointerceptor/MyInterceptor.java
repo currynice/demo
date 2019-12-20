@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 异步的话有  AsyncHandlerInterceptor(方法并发执行完之后的处理)
+ * 异步的话有  AsyncHandlerInterceptor(方法并发执行完之后的处理,当然那三个也是支持的)
  */
 public class MyInterceptor implements HandlerInterceptor {
     @Override
