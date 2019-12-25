@@ -7,6 +7,6 @@ spring:
       hibernate:
          show_sql: true
          format_sql: true
-    database: db2
+    database: h2
 server:
   port: 9999
