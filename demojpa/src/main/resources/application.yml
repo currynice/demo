@@ -28,3 +28,14 @@ server:
 #  ddl-auto:update----每次运行程序，没有表格会新建表格，表内原有数据不会清空，只会更新
 #
 #  ddl-auto:validate----运行程序会校验数据与数据库的字段类型是否相同，不同会报错
+
+
+
+#   H2连接配置
+#  1. jdbc:h2:file:D:/cxy/H2 表示将初始化的数据和H2 Console控制台执行的数据保存到D盘cxy/H2文件夹中，应用重启，数据不会丢失。
+#
+#  2. jdbc:h2:~/testdatabase   在Window操作系统下，”~”这个符号代表的就是当前登录到操作系统的用户对应的用户目录，所以testdatabase数据库对应的文件存放在登录到操作系统的用户对应的用户目录当中，比如我当前是使用Administrator用户登录操作系统的，所以在”C:\Documents and Settings\Administrator.h2”目录中就可以找到test数据库对应的数据库文件了
+#
+#
+#  3.jdbc:h2:mem:test、jdbc:h2:mem:~/.h2/url类似与这种配置的，表示将初始化和h2 console控制台上操作的数据保存在内存（mem-memory）
+
