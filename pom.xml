@@ -51,6 +51,7 @@
         <module>reactive</module>
         <module>demo-rest-template</module>
         <module>application_context</module>
+        <module>spring-session</module>
     </modules>
 
     <properties>
