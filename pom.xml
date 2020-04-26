@@ -52,6 +52,8 @@
         <module>demo-rest-template</module>
         <module>application_context</module>
         <module>spring-session</module>
+        <module>restful</module>
+        <module>retry</module>
     </modules>
 
     <properties>
@@ -201,6 +203,9 @@
                 <artifactId>jackson-dataformat-xml</artifactId>
                 <version>${jackson.dataformat.xml.version}</version>
             </dependency>
+
+
+
 
 
         </dependencies>
