@@ -39,7 +39,7 @@ public class EventProducer {
             if (operateResult>0) {
                 logger.info("事件插入队列成功");
             }
-          //  BlockingQueue<EventModel> q = new ArrayBlockingQueue<EventModel>();//容器挂了，队列将无法找回
+          //  BlockingQueue<EventModel> q = new ArrayBlockingQueue<EventModel>();//容器挂了，此内存中实现的队列将无法找回
             return true;
         }catch(Exception e){
             return false;
