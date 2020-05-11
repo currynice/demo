@@ -54,6 +54,7 @@
         <module>spring-session</module>
         <module>restful</module>
         <module>retry</module>
+        <module>demo-mongo</module>
     </modules>
 
     <properties>
