@@ -31,6 +31,7 @@ public class TestServiceImpl implements TestService {
     @Transactional
     public void insert() throws RollBackException {
         jdbcTemplate.execute("INSERT INTO test (name) VALUES ('cxy')");
+        throw new RollBackException();
     }
 
     @Override
@@ -46,7 +47,12 @@ public class TestServiceImpl implements TestService {
     // 也就是，类内部方法调用本类内部的其他方法并不会引起事务行为，即使被调用方法使用@Transactional注解进行修饰。
     @Override
     public void InvokeInsertThenRollback() throws RollBackException {
-        insertThenRollback();//无效
-        //testService.insertThenRollback();//有效,实现内部调用，实则调用aop的事务增强代理类
+        //insertThenRollback();//相当于this.insertThenRollback()无效
+        testService.insertThenRollback();//有效,实现内部调用，实则调用aop的事务增强代理类
     }
+
+
+
+
+
 }
