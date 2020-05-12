@@ -5,6 +5,7 @@ import com.cxy.demo.transaction.repository.CopyUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -21,7 +22,14 @@ public class CopyUserService {
     private CopyUserRepository copyUserRepository;
 
     @Transactional
-    public void createSubUserWithExceptionWrong(CopyUser entity) {
+    public void createCopyUserWithExceptionWrong(CopyUser entity) {
+        log.info("createCopyUserWithExceptionWrong start");
+        copyUserRepository.save(entity);
+        throw new RuntimeException("invalid status");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void createCopyUserWithExceptionRight(CopyUser entity) {
         log.info("createCopyUserWithExceptionWrong start");
         copyUserRepository.save(entity);
         throw new RuntimeException("invalid status");

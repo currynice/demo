@@ -1,11 +1,17 @@
 package com.cxy.demo.transaction;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import static javax.persistence.GenerationType.AUTO;
 
 /**
  * Description:   <br>
@@ -17,8 +23,11 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "test2")
+@AllArgsConstructor
+@NoArgsConstructor
 public class CopyUser {
     @Id
+    @GeneratedValue(strategy = AUTO)
     private Integer id;
 
     private String copyName;

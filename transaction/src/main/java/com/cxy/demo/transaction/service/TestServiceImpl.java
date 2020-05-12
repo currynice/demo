@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  *    事务行为propagation:
@@ -23,6 +24,8 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+
     /**
      * 默认只对RuntimeException 和Error进行回滚
      * @throws RollBackException
@@ -34,6 +37,7 @@ public class TestServiceImpl implements TestService {
         throw new RollBackException();
     }
 
+    //rollBackFor && noRollbackFor
     @Override
     @Transactional(rollbackForClassName = "RollBackException")
     public void insertThenRollback() throws RollBackException {
@@ -50,6 +54,8 @@ public class TestServiceImpl implements TestService {
         //insertThenRollback();//相当于this.insertThenRollback()无效
         testService.insertThenRollback();//有效,实现内部调用，实则调用aop的事务增强代理类
     }
+
+
 
 
 
