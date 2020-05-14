@@ -6,9 +6,7 @@ import com.cxy.demo.demoredis.exception.SaveUrlException;
 import com.cxy.demo.demoredis.redis.shortUrl.util.CustomScaleUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 
 public abstract class Storage {
 
@@ -25,11 +23,10 @@ public abstract class Storage {
 
     public final String execute(String url){
         //得到10进制hash值
-       int hashValue =  getHashValue(url);
+       Long hashValue =  getHashValue(url);
        Assert.isTrue(hashValue>0,"短地址计算失败");
        //10进制转为62进制,字符串表示
-      // String shortUrl =  CustomScaleUtil._10_to_62(hashValue);
-        String shortUrl =  "kOexw";
+       String shortUrl =  CustomScaleUtil._10_to_62(hashValue);
        //插入原地转和短地址,利用持久化手段唯一性特性(短地址)
         logger.info("尝试保存{}与对应的的短地址{}",url,shortUrl);
        if(insert(shortUrl,url)){
@@ -42,7 +39,7 @@ public abstract class Storage {
            //真的冲突了，hash冲突
            if(null==urlSaved || !urlSaved.equals(url)){
               //给原始网址添加了一段字符[DUPLICATED]
-               int newHashValue =  getHashValue(url+DUPLICATED);
+               Long newHashValue =  getHashValue(url+DUPLICATED);
                String newShortUrl =  CustomScaleUtil._10_to_62(newHashValue);
                logger.info("再次尝试保存{}与新生成的短地址{}",url+DUPLICATED,newShortUrl);
                if(!insert(newShortUrl,url+DUPLICATED)){
@@ -50,13 +47,12 @@ public abstract class Storage {
                    logger.info("第二次保存{}与{}依然失败",url+DUPLICATED,newShortUrl);
                    throw new SaveUrlException("重复添加失败");
                }
+               return newShortUrl;
            }else{
                //重复添加而已
                logger.info("{}已经保存过了，直接返回",shortUrl);
                return shortUrl;
            }
-
-           return null;
 
     }
 
@@ -86,27 +82,27 @@ public abstract class Storage {
      * @param url
      * @return -1表示计算失败
      */
-    private static final Integer getHashValue(String url){
+    private static final Long getHashValue(String url){
         Assert.notBlank(url);
         //url使用utf8编码，因为java int murmur32算法可能返回负数，所以需要把有符号数转换为无符号数
         try {
             int hash =  HashUtil.murmur32(url.getBytes(CHARSET));
-            return int2UnsignedInt(hash);
+            return int2UnsignedLong(hash);
         } catch (UnsupportedEncodingException e) {
-            return -1;
+            return -1L;
         }
     }
 
 
 
     /**
-     * int转换成无符号长整型（C中数据类型）
+     * int转换成无符号长整型（对标C中unsigned long）0 ~ 4294967295
      */
-    private static int int2UnsignedInt(int value) {
-        if (value >= 0)
-            return value;
-        Integer unsigned = Integer.valueOf(Integer.toUnsignedString(value));
-       return unsigned;
+    private static Long int2UnsignedLong(int value) {
+        if (value >= 0) {
+            return (long) value;
+        }
+       return Integer.toUnsignedLong(value);
     }
 
 
@@ -116,9 +112,11 @@ public abstract class Storage {
 
     public static void main(String[] args) {
 
-//        System.out.println(getHashValue("https://www.baidu.com"));
-//        String shortUrl =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu.com"));
-//        System.out.println(getHashValue("https://www.baidu222.com/"));
-//        String shortUrl2 =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu222.com/"));
+        System.out.println(getHashValue("https://www.baidu.com"));
+        String shortUrl =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu.com"));
+        System.out.println(shortUrl);
+        System.out.println(getHashValue("https://www.baidu222798988.com/"));
+        String shortUrl2 =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu222.com/"));
+        System.out.println(shortUrl2);
     }
 }

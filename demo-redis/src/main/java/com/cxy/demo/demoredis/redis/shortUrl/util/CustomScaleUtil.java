@@ -24,7 +24,11 @@ public class CustomScaleUtil {
                                             'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' ,'U','V','W','X',
                                             'Y','Z'};
 
-
+    /**
+     * 10进制无符号数字转换为62进制字符串
+     * @param number  可以是int或long类型
+     * @return
+     */
     public static String _10_to_62(long number){
         return _10_to_62(number,-1);
     }
@@ -35,7 +39,7 @@ public class CustomScaleUtil {
      * @param length 转化成的62进制长度，不足length长度的话高位补0,足的话就忽略
      * @return
      */
-    public static String _10_to_62(long number, int length){
+    private static String _10_to_62(long number, int length){
         Long rest=number;
         Stack<Character> stack=new Stack<>();
         StringBuilder result=new StringBuilder(0);
