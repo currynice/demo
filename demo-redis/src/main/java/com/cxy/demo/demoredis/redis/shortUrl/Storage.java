@@ -63,7 +63,7 @@ public abstract class Storage {
      * @param url      原始地址
      * @return
      */
-    protected boolean  insert(String shortUrl,String url){
+    protected boolean insert(String shortUrl,String url){
         return false;
     }
 
@@ -94,7 +94,6 @@ public abstract class Storage {
     }
 
 
-
     /**
      * int转换成无符号长整型（对标C中unsigned long）0 ~ 4294967295
      */
@@ -103,20 +102,5 @@ public abstract class Storage {
             return (long) value;
         }
        return Integer.toUnsignedLong(value);
-    }
-
-
-
-
-
-
-    public static void main(String[] args) {
-
-        System.out.println(getHashValue("https://www.baidu.com"));
-        String shortUrl =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu.com"));
-        System.out.println(shortUrl);
-        System.out.println(getHashValue("https://www.baidu222798988.com/"));
-        String shortUrl2 =  CustomScaleUtil._10_to_62(getHashValue("https://www.baidu222.com/"));
-        System.out.println(shortUrl2);
     }
 }
