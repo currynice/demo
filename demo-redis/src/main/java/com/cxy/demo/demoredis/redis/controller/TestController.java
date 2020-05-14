@@ -67,4 +67,19 @@ public class TestController {
 
     }
 
+
+//    /**
+//     * json格式返回,authToken:可能需要,ex
+//     * @param url           todo 自动百分号编码  https%3A%2F%2Fgithub.com%2F
+//     * @param domainId     域名id,可选，默认值:
+//     * @param authToken   可能需要
+//     * @param expireDate   前端生成 expireDate=2019-03-31, 即2019-03-31失效
+//     * @return
+//     */
+//    @RequestMapping("shortUrl")
+//    public String getShortUrl(String url,int domainId,String authToken,String expireDate) {
+//        return bitMapService.getTodayLoginLog(today(),"comment",userIdOffSet)?"登陆了":"没有登陆";
+//
+//    }
+
 }
