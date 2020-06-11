@@ -29,6 +29,11 @@ public class HttpFactoryConfig {
     public HttpComponentsClientHttpRequestFactory requestFactory(){
         PoolingHttpClientConnectionManager connectionManager =
                 new PoolingHttpClientConnectionManager(30, TimeUnit.SECONDS);//相当于ttl 30s
+
+//
+//        defaultMaxPerRoute=20，同一个主机 / 域名的最大并发请求数为 2。假设爬虫等需要 10 个并发，默认值太小限制了爬虫的效率。
+//        maxTotal=20，所有主机整体最大并发为 20，即 HttpClient 整体的并发度。
+//        使用同一个 HttpClient 访问 10 个域名，defaultMaxPerRoute 设置为 10，为确保每一个域名都能达到 10 并发，需要把 maxTotal 设置为 100。
         connectionManager.setMaxTotal(200);//200个连接
         connectionManager.setDefaultMaxPerRoute(20);//每个Route20个
 
