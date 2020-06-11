@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +56,18 @@ public class ValidController {
         if (bindingResult.hasErrors()) {
             log.warn(bindingResult.getFieldError().getDefaultMessage());
             return new DemoResult(100, bindingResult.getFieldError().getDefaultMessage());//{"code":100,"msg":"price最低11.23","data":null}
+        }
+        return new DemoResult(200,"成功",newBook);
+        //{"code":200,"msg":"成功","data":{"name":"book1","author":"cxy","price":100.11}}
+    }
+
+
+    @PostMapping("/books2")
+    public DemoResult valid4(@Valid @RequestBody Book newBook, Errors errors) {
+        //返回第一个errormessage
+        if (errors.hasErrors()) {
+            log.warn(errors.getFieldError().getDefaultMessage());
+            return new DemoResult(100, errors.getFieldError().getDefaultMessage());//{"code":100,"msg":"price最低11.23","data":null}
         }
         return new DemoResult(200,"成功",newBook);
         //{"code":200,"msg":"成功","data":{"name":"book1","author":"cxy","price":100.11}}
