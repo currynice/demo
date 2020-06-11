@@ -42,4 +42,20 @@ public class Test {
             currentUser.remove();    }
     }
 
+    /**
+     * {
+     *     "type": "ios",
+     *     "version": "1.0",
+     *     "screen": "1280*800"
+     * }
+     * @param device
+     * @return
+     */
+    @GetMapping("collectDevice")
+    public MyDevice collectDevice(MyDevice device) {
+       return device;
+    }
+
+
+
 }
