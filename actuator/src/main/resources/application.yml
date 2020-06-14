@@ -23,6 +23,7 @@ management:
 #      enabled: false
   # 设置端点暴露的哪些内容，默认["health","info"]，设置"*"代表暴露所有可访问的端点(mappings,env....)
   endpoints:
+#web 或 JMX 方式监控
     web:
       exposure:
         include: '*'
@@ -31,3 +32,13 @@ management:
     #自定义参数路径映射,k v形式,GET: localhost:8090/sys/actuator/newhealth
       path-mapping:
         health: newhealth
+
+
+#配置Health Indicator
+  health:
+    defaults:
+#     true|false
+#      enabled:
+#      management.health.<id>.enabled=true
+
+#      management.endpoint.health.show-details=never|when-authorized|always
