@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 客户端消费者
  * 1.blocking: 阻塞操作BRPOP ,避免队列空时,空轮询带来的压力
- * 2.完成重连逻辑，避免长时间闲置，连接被关闭 todo
+ * 2.完成重连逻辑，因为长时间闲置，连接会被关闭
  * @Author: cxy
  * @Date: 2019/5/11 21:32
  * @Description:  分发Event给Handler
