@@ -84,6 +84,13 @@ public class LimitAspect {
     /**
      * 限流脚本,
      * refer to:https://blog.csdn.net/u011489043/article/details/78820285
+     *
+     *      * 原子性 限流脚本,实际还是调用redis
+     *      *
+     *      * c :当前访问次数
+     *      *    当前访问次数大于5次，报错
+     *      *    当前访问次数不足5次，增加一次计数
+     *      *    如果是第一次，设置过期时间
      */
     private String buildScript() {
         return "local c" +
