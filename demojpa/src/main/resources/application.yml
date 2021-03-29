@@ -1,9 +1,14 @@
 spring:
-  #  datasource:
-  #    url: jdbc:mysql://127.0.0.1:3306/test?useUniCode=true&characterEncoding=utf8&useSSL=false
-  #    driverClassName: com.mysql.jdbc.Driver
-  #    username: admin
-  #    password: admin
+  datasource:
+#      url: jdbc:mysql://127.0.0.1:3306/test?useUniCode=true&characterEncoding=utf8&useSSL=false
+#      driverClassName: com.mysql.jdbc.Driver
+#      username: admin
+#      password: admin
+      url: jdbc:h2:file:D:\h2\demojpa
+      username: sa
+      password: 123456
+
+
   jpa:
     database: H2
     show-sql: true
@@ -32,7 +37,7 @@ server:
 
 
 #   H2连接配置
-#  1. jdbc:h2:file:D:/cxy/H2 表示将初始化的数据和H2 Console控制台执行的数据保存到D盘cxy/H2文件夹中，应用重启，数据不会丢失。
+#  1. jdbc:h2:file:D:\h2 表示将初始化的数据和H2 Console控制台执行的数据保存到D盘cxy/H2文件夹中，应用重启，数据不会丢失。
 #
 #  2. jdbc:h2:~/testdatabase   在Window操作系统下，”~”这个符号代表的就是当前登录到操作系统的用户对应的用户目录，所以testdatabase数据库对应的文件存放在登录到操作系统的用户对应的用户目录当中，比如我当前是使用Administrator用户登录操作系统的，所以在”C:\Documents and Settings\Administrator.h2”目录中就可以找到test数据库对应的数据库文件了
 #
