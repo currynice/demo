@@ -55,6 +55,7 @@
         <module>restful</module>
         <module>retry</module>
         <module>demo-mongo</module>
+        <module>demo-https</module>
     </modules>
 
     <properties>
