@@ -56,6 +56,7 @@
         <module>retry</module>
         <module>demo-mongo</module>
         <module>demo-https</module>
+        <module>performance-counter</module>
     </modules>
 
     <properties>
