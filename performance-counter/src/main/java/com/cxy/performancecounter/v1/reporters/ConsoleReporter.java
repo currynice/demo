@@ -61,7 +61,7 @@ public class ConsoleReporter {
                     String apiName = entry.getKey();
                     List<RequestInfo> requestInfosPerApi = entry.getValue();
                     // 第2个代码逻辑：根据原始数据，计算得到统计数据；
-                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
+                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi);
                     stats.put(apiName, requestStat);
                 }
 

@@ -18,10 +18,9 @@ public class Aggregator {
     /**
      * 根据取出的原始数据，durationInMillis ，计算durationInMillis内的统计结果
      * @param requestInfos 原始数据
-     * @param durationInMillis
      * @return
      */
-    public static RequestStat aggregate(List<RequestInfo> requestInfos, long durationInMillis) {
+    public static RequestStat aggregate(List<RequestInfo> requestInfos) {
         //最大响应时间(设的很小，这样只要有一个合法的值，即可替代)
         double maxRespTime = Double.MIN_VALUE;
 
@@ -61,7 +60,6 @@ public class Aggregator {
             avgRespTime = sumRespTime / count;
         }
 
-        long tps = (long)(count / durationInMillis * 1000);
 
         //按 responseTime排序
         Collections.sort(requestInfos, (d1,d2) ->{
@@ -92,7 +90,6 @@ public class Aggregator {
         requestStat.setP999ResponseTime(p999RespTime);
         requestStat.setP99ResponseTime(p99RespTime);
         requestStat.setCount(count);
-        requestStat.setTps(tps);
         return requestStat;
     }
 }

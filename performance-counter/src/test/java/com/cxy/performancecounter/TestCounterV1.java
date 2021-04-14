@@ -19,10 +19,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestCounter {
+public class TestCounterV1 {
 
     @Test
-    public void contextLoads() {
+    public void testv1() {
 
         MetricsStorage storage = new RedisMetricsStorage();
         ConsoleReporter consoleReporter = new ConsoleReporter(storage);
@@ -47,5 +47,8 @@ public class TestCounter {
         }
 
     }
+
+
+
 
 }
