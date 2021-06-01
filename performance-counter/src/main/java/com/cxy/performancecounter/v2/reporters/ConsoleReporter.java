@@ -9,6 +9,7 @@ import com.cxy.performancecounter.v2.stat.Aggregator;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Description: 以一定频率统计并发送统计数据到命令行和邮件。</br>
@@ -38,7 +39,7 @@ public class ConsoleReporter extends ScheduledReporter{
     //todo   startRepeatedReport 被调用多次，不仅ScheduledExecutorService会排队执行，造成资源浪费
     //且控制台打印重复日志
     // 内部维护一个可视字段 started。然后在方法执行时，优先判断该字段是否已经变为true。如果是则不再往下执行。也算是保证该函数的幂等性。
-
+    private  AtomicBoolean started = new AtomicBoolean(false);
 
     private ScheduledExecutorService executor;
 
@@ -68,15 +69,24 @@ public class ConsoleReporter extends ScheduledReporter{
         executor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("开始执行console reporter");
-                // 第1个代码逻辑：根据给定的时间区间，从数据库中拉取数据；
-                long durationInMillis = durationInSeconds * 1000;
-                long endTimeInMillis = System.currentTimeMillis();
-                long startTimeInMillis = endTimeInMillis - durationInMillis;
-                doStatAndReport(startTimeInMillis,endTimeInMillis);
+                if(!started()){
+                    started.set(true);
+                    System.out.println("开始执行console reporter");
+                    // 第1个代码逻辑：根据给定的时间区间，从数据库中拉取数据；
+                    long durationInMillis = durationInSeconds * 1000;
+                    long endTimeInMillis = System.currentTimeMillis();
+                    long startTimeInMillis = endTimeInMillis - durationInMillis;
+                    doStatAndReport(startTimeInMillis,endTimeInMillis);
+                    started.set(false);
+                }
             }
         }, 0, periodInSeconds, TimeUnit.SECONDS);
     }
+
+    private boolean started(){
+        return started.get();
+    }
+
 }
 
 

@@ -42,6 +42,7 @@
         <module>demo-cors-2</module>
         <module>demo-interceptor</module>
         <module>demo-redis</module>
+        <module>imagestore</module>
         <module>demo-cache</module>
         <module>demo-converter</module>
         <module>failure-analyzer</module>

@@ -31,7 +31,7 @@ public class Aggregator {
             String apiName = entry.getKey();
             List<RequestInfo> requestInfosPerApi = entry.getValue();
             RequestStat requestStat = doAggregate(requestInfosPerApi);
-            requestStats.put(apiName, requestStat);
+            requestStats.put(apiName.substring(4), requestStat);
         }
         return requestStats;
     }

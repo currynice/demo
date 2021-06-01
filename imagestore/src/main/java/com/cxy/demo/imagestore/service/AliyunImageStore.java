@@ -18,11 +18,11 @@ public class AliyunImageStore  implements  ImageStore{
     }
 
     /**
-     *生成唯一访问凭证,阿里云需要，别的可能不需要
+     *生成唯一访问凭证,阿里云需要有这个功能，别的可能没有
      */
     private String generateAccessToken() {
         // ...根据accesskey/secrectkey等生成access token
-        return "";
+        return "1243216531";
     }
 
 
@@ -39,7 +39,7 @@ public class AliyunImageStore  implements  ImageStore{
         String accessToken = generateAccessToken();
         //...上传图片到阿里云...
         //...返回图片存储在阿里云上的地址(url）...
-        return "url";
+        return "url?token="+accessToken;
     }
 
     /**
@@ -52,6 +52,11 @@ public class AliyunImageStore  implements  ImageStore{
         String accessToken = generateAccessToken();
         //...从阿里云下载图片...
         return new Image();
+    }
+
+    @Override
+    public String getType() {
+        return "阿里云";
     }
 }
 
