@@ -58,6 +58,7 @@
         <module>demo-mongo</module>
         <module>demo-https</module>
         <module>performance-counter</module>
+        <module>demo-log</module>
     </modules>
 
     <properties>
