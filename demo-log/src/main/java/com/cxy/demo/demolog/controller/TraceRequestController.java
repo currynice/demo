@@ -25,7 +25,7 @@ public class TraceRequestController {
     @GetMapping("/request")
     public String request() {
 
-        String url = "http://127.0.0.1:9527/api/display/controller?name=qinyi";
+        String url = "http://127.0.0.1:9527/api/xxxx"; //todo
         log.info("send request to 9527, status code is: [{}]",
                 restTemplate.getForEntity(url, Void.class).getStatusCodeValue());
         return "ok";
