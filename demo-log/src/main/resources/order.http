@@ -1,0 +1,14 @@
+#######
+
+GET http://127.0.0.1:8080/order/changeAddress?userId=cxy2
+
+###
+
+
+POST 127.0.0.1:8080/order/modifyUser HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{"address":"nj","deliveryOrderNo":"NO001","userId":"007"}
+
+###

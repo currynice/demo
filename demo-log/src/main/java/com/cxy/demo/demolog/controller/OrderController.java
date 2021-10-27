@@ -5,9 +5,7 @@ import com.cxy.demo.demolog.entity.UpdateDelivery;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <h1>订单</h1>
@@ -51,9 +49,10 @@ public class OrderController {
      * 让自定义函数的解析在 modifyAddress() 方法执行之
      * @param request
      */
-    @LogRecord(content = "修改了订单的配送员：从“{queryOldUser{#request.deliveryOrderNo()}}”, 修改到“{deveryUser{#request.userId}}”",
+    @LogRecord(success = "修改了订单的配送员：从“{queryOldUser{#request.deliveryOrderNo()}}”, 修改到“{deveryUser{#request.userId}}”",
             bizNo="#request.deliveryOrderNo")
-    public void modifyAddress(UpdateDelivery request){
+    @PostMapping("/modifyUser")
+    public void modifyUser(@RequestBody UpdateDelivery request){
         // 更新派送信息 电话，收件人、地址
 //        doUpdate(request);
     }
