@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 /**
- * Description:  监控某个api的运行状态  <br>
+ * Description:  标识application 的状态：此处 通过监控api（/items）的运行状态  <br>
  * Date: 2020/6/12 10:14  <br>
  *
  * @author :cxy <br>
@@ -24,12 +24,12 @@ public class MyHealthIndicator implements HealthIndicator {
     @Autowired
     private RestTemplate restTemplate;
 
+
         @Override
         public Health health() {
             try {
-                ResponseEntity<List<MyItem>> responseEntity =
-                restTemplate.exchange("http://localhost:8080/api/items", HttpMethod.GET, null, new
-                                ParameterizedTypeReference<List<MyItem>>() {});
+                ResponseEntity<List> responseEntity =
+                restTemplate.exchange("http://localhost:8080/demo/items", HttpMethod.GET, null, List.class);
                     if (responseEntity.getStatusCode().is2xxSuccessful())
                         return Health.up().build();
                     else
