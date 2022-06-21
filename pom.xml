@@ -75,7 +75,7 @@
         <hutool.version>4.5.11</hutool.version>
         <spring.boot.admin>2.1.6</spring.boot.admin>
         <user.agent.version>1.20</user.agent.version>
-        <mysql.connection.version>5.1.47</mysql.connection.version>
+        <mysql.connection.version>8.0.28</mysql.connection.version>
         <mysql.starter.version>2.0.0</mysql.starter.version>
         <pagehelper.version>1.2.3</pagehelper.version>
         <google.version>20.0</google.version>
